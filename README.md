@@ -25,6 +25,7 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 | [docs/BOM.md](docs/BOM.md) | Alkatrészlista: fényvezérlő és teljes gép |
 | [docs/TERVEK_ES_FORRASOK.md](docs/TERVEK_ES_FORRASOK.md) | A Paper-Replika terv letöltései és további források |
 | [docs/elektronika.html](docs/elektronika.html) | Kapcsolási rajz és BOM egy oldalon (böngészőben megnyitható) |
+| [docs/CL-415_Canadair_festes_matrica.pdf](docs/CL-415_Canadair_festes_matrica.pdf) | Canadair-stílusú festési séma és matricaív (A3) |
 | [docs/img/](docs/img/) | Ábrák SVG-ben |
 | [firmware/cl415_lights/](firmware/cl415_lights/cl415_lights.ino) | Fényvezérlő firmware (Arduino, XIAO RP2040) |
 
