@@ -1,0 +1,241 @@
+<title>CL-415 elektronika</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: egyoszlopos műszaki lap — fejléc, kapcsolási rajz rácson, bekötési szabályok, két BOM táblázat */
+:root{
+  --paper:#f2f4f3; --sheet:#fbfcfb; --ink:#1d2830; --muted:#5b6a72; --line:#cdd6d8;
+  --wire:#24485e; --grid:#e3e9ea; --red:#c8361d; --yellow:#d99a12; --green:#3f7d2a;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0f161a; --sheet:#141d22; --ink:#e2e9eb; --muted:#93a3aa; --line:#2b3a42;
+  --wire:#8ab6cf; --grid:#1b262c; --red:#ff6a4d; --yellow:#f0b93a; --green:#7fc45e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f161a; --sheet:#141d22; --ink:#e2e9eb; --muted:#93a3aa; --line:#2b3a42;
+  --wire:#8ab6cf; --grid:#1b262c; --red:#ff6a4d; --yellow:#f0b93a; --green:#7fc45e; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font:15px/1.6 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:36px}
+header{display:grid;gap:6px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+h1{font:600 clamp(30px,5vw,44px)/1.05 var(--f-display);margin:0;text-wrap:balance}
+h2{font:600 24px/1.2 var(--f-display);margin:0 0 4px;text-wrap:balance}
+h3{font:600 18px/1.2 var(--f-display);margin:18px 0 6px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font:13px var(--f-mono);color:var(--muted)}
+.meta b{color:var(--ink);font-weight:500}
+section{display:grid;gap:10px;min-width:0}
+.lead{color:var(--muted);max-width:68ch;margin:0}
+.sch{overflow-x:auto;border:1px solid var(--line);background-color:var(--sheet);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px}
+.sch svg{display:block;width:1240px;max-width:none;height:auto}
+.sch .w{fill:none;stroke:var(--wire);stroke-width:1.6;stroke-linejoin:round}
+.sch .thick{stroke-width:3}
+.sch .part{fill:var(--sheet);stroke:var(--wire);stroke-width:1.6}
+.sch .box{fill:var(--sheet);stroke:var(--ink);stroke-width:1.6}
+.sch .dot{fill:var(--wire)}
+.sch .arrowf{fill:var(--wire)}
+.sch text{font-family:var(--f-mono);fill:var(--ink)}
+.sch .ref{font-size:12px;font-weight:500}
+.sch .val{font-size:11px;fill:var(--muted)}
+.sch .net{font-size:12px;font-weight:500;fill:var(--red)}
+.sch .ttl{font-family:var(--f-display);font-size:15px;font-weight:600}
+.hint{font:12px var(--f-mono);color:var(--muted);margin:0}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.rule{border-left:3px solid var(--yellow);border-radius:0;padding:6px 12px;background:var(--sheet)}
+.rule.crit{border-left-color:var(--red)}
+.rule b{display:block;font:600 16px var(--f-display);margin-bottom:2px}
+.rule p{margin:0;font-size:14px;color:var(--ink)}
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--sheet)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
+td.ref,td.qty{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.qty{text-align:right}
+td.note{color:var(--muted);font-size:13px}
+tr.grp td{font:600 15px var(--f-display);background:var(--paper);color:var(--ink);letter-spacing:.02em}
+.tag{font:500 11px var(--f-mono);padding:1px 6px;border:1px solid var(--green);color:var(--green);border-radius:3px;margin-left:6px;white-space:nowrap}
+.pins{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.pin{border:1px solid var(--line);background:var(--sheet);padding:10px 12px}
+.pin b{font:600 16px var(--f-display)}
+.pin ol{margin:6px 0 0;padding-left:22px;font:13px/1.7 var(--f-mono)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Canadair CL-415 · RC vízibombázó</div>
+    <h1>CL-415 elektronika</h1>
+    <div class="meta"><span>Fesztáv <b>1800 mm</b></span><span>Anyag <b>5 mm XPS</b></span><span>Akku <b>3S LiPo</b></span><span>Vevő <b>TGY-iA6B</b></span><span>Fényvezérlő <b>XIAO RP2040</b></span></div>
+  </header>
+
+  <section>
+    <h2>Fényvezérlő kapcsolási rajz</h2>
+    <p class="lead">A helyzetfények folyamatosan égnek. A villogót, a strobe-okat és a leszállófényeket egy-egy AO3400 MOSFET kapcsolja a GND oldalon. A leszállófény a futómű csatornáját (CH5) követi.</p>
+    <div class="sch" id="sch"></div>
+    <p class="hint">Széles rajz: telefonon oldalra görgethető.</p>
+  </section>
+
+  <section>
+    <h2>Bekötési szabályok</h2>
+    <div class="rules">
+      <div class="rule crit"><b>J1: csak jel és GND</b><p>A CH5 Y-kábel piros (+) erét húzd ki vagy szigeteld le. A vevő UBEC-je és a fénypanel step-downja nem köthető össze.</p></div>
+      <div class="rule crit"><b>USB csak akku nélkül</b><p>A XIAO 5V lába közvetlenül az USB-tápra csatlakozik. Programozáskor húzd le a gép akkuját.</p></div>
+      <div class="rule"><b>Step-down beállítása</b><p>Az MP1584EN kimenetét a XIAO és a LED-ek nélkül, multiméterrel állítsd 5,0 V-ra, és csak utána kösd rá a többit.</p></div>
+      <div class="rule"><b>Közös GND</b><p>A vevő, a step-down és a XIAO GND-je egy ponton legyen összekötve.</p></div>
+      <div class="rule"><b>1 W-os LED-ek hűtése</b><p>Mindegyik alu csillagpanelen legyen. A leszállófény folyamatosan ég, ezért a csillagot fémes felülethez vagy kis hűtőlemezhez ragaszd.</p></div>
+      <div class="rule"><b>Vízállóság</b><p>A szárnyvégi LED-eket és csatlakozókat UV-ragasztóval vagy átlátszó epoxival öntsd ki, a panelt tedd zsugorcsőbe.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Csatlakozók a szárnyban</h2>
+    <p class="lead">A szárnyban lévő LED-ek előtét-ellenállásai a LED mellé, a szárnyba kerülnek. Így elég 3 és 4 eret átvinni a levehető szárnyrészeken.</p>
+    <div class="pins">
+      <div class="pin"><b>J3 · bal külső szárny</b><ol><li>+5V</li><li>GND</li><li>STROBE− (Q2 drain)</li></ol></div>
+      <div class="pin"><b>J4 · jobb külső szárny</b><ol><li>+5V</li><li>GND</li><li>STROBE− (Q2 drain)</li></ol></div>
+      <div class="pin"><b>J5 · középső szárny ↔ törzs</b><ol><li>+5V</li><li>GND</li><li>STROBE− (Q2 drain)</li><li>LAND− (Q3 drain)</li></ol></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>BOM: fényvezérlő</h2>
+    <div class="tbl"><table id="bom1"><thead><tr><th>Jel</th><th>Megnevezés</th><th>Érték / típus</th><th>Db</th><th>Megjegyzés</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <h2>BOM: teljes gép</h2>
+    <p class="lead">A mennyiségek a 180 cm-es Paper-Replika tervhez szólnak. A habmennyiség becslés, kb. 30% tartalékkal.</p>
+    <div class="tbl"><table id="bom2"><thead><tr><th>Tétel</th><th>Megnevezés</th><th>Érték / típus</th><th>Db</th><th>Megjegyzés</th></tr></thead><tbody></tbody></table></div>
+  </section>
+</div>
+
+<script>
+(function(){
+  let s='';
+  const L=p=>{s+=`<polyline class="w" points="${p}"/>`};
+  const T=(x,y,t,c='ref',a='start')=>{s+=`<text x="${x}" y="${y}" class="${c}" text-anchor="${a}">${t}</text>`};
+  const dot=(x,y)=>{s+=`<circle class="dot" cx="${x}" cy="${y}" r="3.5"/>`};
+  const gnd=(x,y)=>{L(`${x},${y} ${x},${y+10}`);s+=`<line class="w" x1="${x-9}" y1="${y+10}" x2="${x+9}" y2="${y+10}"/><line class="w" x1="${x-6}" y1="${y+14}" x2="${x+6}" y2="${y+14}"/><line class="w" x1="${x-3}" y1="${y+18}" x2="${x+3}" y2="${y+18}"/>`};
+  const rV=(x,y1,y2,ref,val)=>{const m=(y1+y2)/2;L(`${x},${y1} ${x},${m-18}`);s+=`<rect class="part" x="${x-6}" y="${m-18}" width="12" height="36"/>`;L(`${x},${m+18} ${x},${y2}`);T(x+12,m-2,ref);T(x+12,m+12,val,'val')};
+  const rH=(x1,x2,y,ref,val)=>{const m=(x1+x2)/2;L(`${x1},${y} ${m-18},${y}`);s+=`<rect class="part" x="${m-18}" y="${y-6}" width="36" height="12"/>`;L(`${m+18},${y} ${x2},${y}`);T(m,y-12,`${ref} ${val}`,'ref','middle')};
+  const led=(x,y1,y2,ref,desc,col)=>{const m=(y1+y2)/2;L(`${x},${y1} ${x},${m-10}`);s+=`<polygon points="${x-9},${m-10} ${x+9},${m-10} ${x},${m+6}" style="fill:${col};stroke:var(--wire);stroke-width:1.4"/><line class="w" x1="${x-9}" y1="${m+6}" x2="${x+9}" y2="${m+6}"/>`;L(`${x},${m+6} ${x},${y2}`);T(x+14,m-2,ref);T(x+14,m+12,desc,'val')};
+  const fet=(cx,g,ref)=>{s+=`<line class="w" x1="${cx-12}" y1="${g-14}" x2="${cx-12}" y2="${g+14}"/><line class="w thick" x1="${cx-4}" y1="${g-18}" x2="${cx-4}" y2="${g+18}"/>`;L(`${cx-4},${g-12} ${cx+10},${g-12} ${cx+10},${g-30}`);L(`${cx-4},${g+12} ${cx+10},${g+12} ${cx+10},${g+30}`);s+=`<polygon class="arrowf" points="${cx-3},${g+12} ${cx+5},${g+8} ${cx+5},${g+16}"/>`;T(cx+16,g+4,ref);T(cx+16,g+18,'AO3400','val');gnd(cx+10,g+30)};
+  const stage=(pinY,rg,rgRef,node,pd,cx,rTop,rRef,rVal,ledRef,ledDesc,col)=>{
+    rH(620,700,pinY,rgRef,'100Ω');L(`700,${pinY} ${node},${pinY}`);dot(node,pinY);
+    rV(node,pinY,pinY+60,pd,'100k');gnd(node,pinY+60);L(`${node},${pinY} ${cx-12},${pinY}`);
+    fet(cx,pinY,rg);const d=cx+10;led(d,rTop,pinY-30,ledRef,ledDesc,col);rV(d,50,rTop,rRef,rVal);dot(d,50)};
+
+  /* tápág */
+  T(40,30,'TÁP','ttl');
+  L('60,85 60,112');[112,120,128,136,144,152].forEach((y,i)=>{const h=i%2?8:14;s+=`<line class="w" x1="${60-h}" y1="${y}" x2="${60+h}" y2="${y}"/>`});
+  L('60,152 60,175');gnd(60,175);T(82,132,'BT1');T(82,146,'3S LiPo, XT60','val');
+  rH(60,190,85,'F1','1,5A PTC');
+  s+=`<rect class="box" x="190" y="70" width="110" height="100"/>`;T(245,104,'U2','ref','middle');T(245,120,'MP1584EN','val','middle');T(245,136,'5,0 V / 3 A','val','middle');
+  L('190,150 170,150');gnd(170,150);L('300,150 320,150');gnd(320,150);
+  L('300,85 330,85 330,50 1090,50');T(338,42,'+5V','net');
+  L('350,50 350,96');s+=`<line class="w" x1="340" y1="96" x2="360" y2="96"/><line class="w" x1="340" y1="104" x2="360" y2="104"/>`;T(343,92,'+','val','end');L('350,104 350,114');gnd(350,114);dot(350,50);T(364,100,'C1');T(364,114,'220µF','val');
+
+  /* XIAO */
+  s+=`<rect class="box" x="440" y="180" width="160" height="290"/>`;
+  [[210,'5V'],[250,'GND'],[315,'D0']].forEach(([y,n])=>{L(`420,${y} 440,${y}`);T(450,y+4,n,'val')});
+  [[230,'D1'],[330,'D2'],[430,'D3']].forEach(([y,n])=>{L(`600,${y} 620,${y}`);T(590,y+4,n,'val','end')});
+  T(520,388,'U1','ref','middle');T(520,404,'Seeed XIAO RP2040','val','middle');
+  L('420,210 410,210 410,50');dot(410,50);L('420,250 400,250');gnd(400,250);
+
+  /* CH5 bemenet és osztó */
+  T(40,286,'J1 · CH5 Y-kábel','ref');
+  s+=`<rect class="box" x="40" y="300" width="60" height="50"/>`;T(52,319,'S','val');T(52,339,'GND','val');
+  rH(100,220,315,'R1','4,7k');L('220,315 420,315');dot(300,315);rV(300,315,385,'R2','10k');gnd(300,385);
+  L('100,335 140,335');gnd(140,335);T(40,370,'+ (piros) ér: NEM bekötve','net');
+
+  /* MOSFET fokozatok */
+  T(640,30,'KAPCSOLT FÉNYEK','ttl');
+  stage(230,'Q1','R3',715,'R6',760,130,'R9','10Ω 1W','D1','1W piros villogó','var(--red)');
+  stage(330,'Q2','R4',875,'R7',920,210,'R10/R11','5,6Ω 1W ×2','D2/D3','2× 1W strobe · J3/J4','var(--sheet)');
+  stage(430,'Q3','R5',1035,'R8',1080,250,'R12/R13','6,8Ω 1W ×2','D4/D5','2× 1W leszálló · J5','var(--yellow)');
+
+  /* helyzetfények */
+  T(40,432,'HELYZETFÉNYEK (mindig égnek)','ttl');
+  [[80,'R14','150Ω','D6','piros · J3','var(--red)'],[190,'R15','150Ω','D7','zöld · J4','var(--green)'],[300,'R16','100Ω','D8','fehér · farok','var(--sheet)']].forEach(([x,r,v,d,t,c])=>{
+    T(x,462,'+5V','net','middle');L(`${x},468 ${x},476`);rV(x,476,540,r,v);led(x,540,598,d,t,c);gnd(x,598)});
+
+  document.getElementById('sch').innerHTML=`<svg viewBox="0 0 1240 640" width="1240" role="img" aria-label="Fényvezérlő kapcsolási rajz"><title>CL-415 fényvezérlő kapcsolási rajz</title>${s}</svg>`;
+
+  const bom1=[
+    ['U1','Mikrokontroller panel','Seeed XIAO RP2040',1,'USB-C, Arduino IDE'],
+    ['U2','Step-down modul','MP1584EN, 5,0 V-ra állítva, 3 A',1,'bemenet 3S (max. 12,6 V)'],
+    ['F1','Önvisszaálló biztosító','PTC 1,5 A',1,'az akku + ágában'],
+    ['C1','Elektrolit kondenzátor','220 µF / 10 V',1,'az 5 V-os sínre, a panel mellé'],
+    ['R1','Ellenállás','4,7 kΩ 0,25 W',1,'CH5 osztó, soros'],
+    ['R2','Ellenállás','10 kΩ 0,25 W',1,'CH5 osztó, GND felé'],
+    ['R3–R5','Ellenállás','100 Ω 0,25 W',3,'gate soros'],
+    ['R6–R8','Ellenállás','100 kΩ 0,25 W',3,'gate lehúzó'],
+    ['Q1–Q3','N-csatornás MOSFET','AO3400A, SOT-23',3,'3,3 V-ról teljesen nyit; SOT-23 → DIP adapterre forrasztható'],
+    ['R9','Ellenállás','10 Ω 1 W',1,'villogó, kb. 280 mA'],
+    ['R10, R11','Ellenállás','5,6 Ω 1 W',2,'strobe, a szárnyvégbe a LED mellé'],
+    ['R12, R13','Ellenállás','6,8 Ω 1 W',2,'leszállófény, kb. 260 mA folyamatos'],
+    ['R14, R15','Ellenállás','150 Ω 0,25 W',2,'piros és zöld helyzetfény, a szárnyba'],
+    ['R16','Ellenállás','100 Ω 0,25 W',1,'fehér farokfény'],
+    ['D1','Teljesítmény-LED','1 W piros, alu csillagon',1,'villogó a törzs tetején'],
+    ['D2, D3','Teljesítmény-LED','1 W hideg fehér, alu csillagon',2,'strobe, szárnyvégek'],
+    ['D4, D5','Teljesítmény-LED','1 W fehér, alu csillagon',2,'leszállófény, belépőél, hűtés kell'],
+    ['D6','LED','5 mm piros, nagy fényerejű',1,'bal szárnyvég'],
+    ['D7','LED','5 mm zöld, nagy fényerejű',1,'jobb szárnyvég'],
+    ['D8','LED','5 mm fehér',1,'farok'],
+    ['J1','Szervókábel / Y-kábel','JR/Futaba, 3 eres',1,'csak jel és GND, a piros eret kihúzni'],
+    ['J2','Akku leágazás','XT60 Y-kábel vagy forrasztott leágazás',1,'a főakkuról'],
+    ['J3, J4','Csatlakozópár','JST-PH 2,0, 3 pólusú',2,'külső szárnyfelek'],
+    ['J5','Csatlakozópár','JST-PH 2,0, 4 pólusú',1,'szárny ↔ törzs'],
+    ['–','Szilikon vezeték','26 AWG, piros/fekete/sárga',6,'méter, becslés'],
+    ['–','Lyukraszteres panel','kb. 30×50 mm',1,'vagy saját NYÁK'],
+    ['–','Zsugorcső, UV-ragasztó','vegyes',1,'csomag; vízzárás']
+  ];
+  const bom2=[
+    ['g','Szerkezet'],
+    ['–','XPS padlóalátét','5 mm, sima, fólia nélküli lapok',4,'m², becslés +30%'],
+    ['–','Rétegelt lemez','3 mm nyír',1,'tábla (formerek, motortartók, futótalpak)'],
+    ['–','Főtartó','a Paper-Replika terv szerint',1,'készlet'],
+    ['–','PP hullámlemez (coroplast)','2–3 mm',1,'tábla, a hajótest aljára és a lépcsőre'],
+    ['–','Üvegszövet','25–50 g/m²',1,'m², hajótest alja'],
+    ['–','Laminálóepoxi','2 komponensű',200,'g'],
+    ['–','Kontaktragasztó','UHU Por',2,'tubus'],
+    ['–','Pillanatragasztó','hab-barát (UHU Por-kompatibilis) + aktivátor',1,'készlet; sima CA oldja az XPS-t'],
+    ['–','Gyorsepoxi','5 perces',1,'készlet'],
+    ['–','Festék és lakk','vízbázisú akril (sárga, piros) + vízbázisú lakk',1,'készlet; spray és oldószeres festék tilos'],
+    ['–','Kormánylap-zsanér','CA-zsanér vagy erős szalag',1,'csomag'],
+    ['–','Tolórúd + bowdencső','1,2 mm acél, 2 mm cső',3,'méter'],
+    ['–','Kormánykar','műanyag, csavaros',8,'db'],
+    ['–','Csavarok','M3 csavar + önzáró anya, vegyes',1,'készlet; orrfutó és motortartó rögzítés'],
+    ['g','Hajtás'],
+    ['M1, M2','Kefe nélküli motor','2830 méret, 1000–1100 kV',2,'a Paper-Replika szerint'],
+    ['ESC1, ESC2','Fordulatszabályzó','40 A',2,'BEC piros ere megszakítva'],
+    ['–','Légcsavar CW','8×6 négytollú',2,'egy tartalék'],
+    ['–','Légcsavar CCW','8×6 négytollú',2,'egy tartalék; ellentétes forgású pár'],
+    ['–','Akku','3S LiPo 2200–3300 mAh, XT60',2,'a nehézségi pont szerint választva'],
+    ['–','ESC Y-kábel','JR, gázcsatornára',1,'CH3'],
+    ['g','RC és tápellátás'],
+    ['–','Adó','Turnigy TGY-i10',1,'<span class="tag">meglévő</span>'],
+    ['–','Vevő','Turnigy TGY-iA6B',1,'<span class="tag">meglévő</span>'],
+    ['–','UBEC','5–6 V, min. 5 A',1,'a vevő és a szervók tápja'],
+    ['–','Szervó','9 g, műanyag fogaskerekes',7,'2 csűrő, 1 magassági, 1 oldal, 1 vízikormány, 2 fékszárny'],
+    ['–','Y-kábel','JR',3,'csűrő, fékszárny, oldal + vízikormány'],
+    ['–','Elosztó a CH5-re','JR, 1→4',1,'3 futószervó + fénypanel jele'],
+    ['–','Szervó hosszabbító','30 cm',6,'a szárnyba'],
+    ['g','Futómű'],
+    ['–','Vízálló szervó','9–12 g, fém fogaskerekes',3,'futók mozgatása a száraz térből'],
+    ['–','Futószár','3 mm rugóacél drót',1,'méter'],
+    ['–','Főkerék','45–55 mm, könnyű habkerék',2,'db'],
+    ['–','Orrkerék','35–45 mm, könnyű habkerék',1,'db'],
+    ['–','Tömítő átvezetés','zsírozott sárgaréz cső + szilikon',3,'tolórúd az aknafalon át'],
+    ['g','Telemetria'],
+    ['–','Feszültségszenzor','TGY-CVT01',1,'<span class="tag">meglévő</span>'],
+    ['–','Hőmérsékletszenzor','TGY-CTM01',1,'<span class="tag">meglévő</span> ESC hűtőbordára'],
+    ['–','Fordulatszám-szenzor','TGY-CPD01 mágneses',1,'<span class="tag">meglévő</span> mágnes a motorharangra'],
+    ['g','Jelzőfények'],
+    ['–','Fényvezérlő','lásd a fényvezérlő BOM-ot',1,'készlet']
+  ];
+  const fill=(id,rows)=>{document.querySelector(`#${id} tbody`).innerHTML=rows.map(r=>r[0]==='g'?`<tr class="grp"><td colspan="5">${r[1]}</td></tr>`:`<tr><td class="ref">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="qty">${r[3]}</td><td class="note">${r[4]}</td></tr>`).join('')};
+  fill('bom1',bom1);fill('bom2',bom2);
+})();
+</script>

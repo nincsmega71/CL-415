@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 420" width="760" height="840" role="img"><title>CL-415 jelzőfények felülnézetben</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5b6a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><style>text{font-family:DejaVu Sans, Arial, Helvetica, sans-serif;fill:#1d2830}.th{font-size:14px;font-weight:bold}.ts{font-size:12px;fill:#5b6a72}.arr{stroke:#5b6a72;stroke-width:1.2;fill:none}.leader{stroke:#5b6a72;stroke-width:0.8;stroke-dasharray:3 3;fill:none}</style><rect width="380" height="420" fill="#ffffff"/><rect x="178" y="40" width="24" height="220" rx="10" fill="none" stroke="#5b6a72" stroke-width="1.2"/>
+<rect x="40" y="110" width="300" height="26" rx="4" fill="none" stroke="#5b6a72" stroke-width="1.2"/>
+<rect x="150" y="236" width="80" height="12" rx="3" fill="none" stroke="#5b6a72"/>
+<ellipse cx="140" cy="108" rx="9" ry="16" fill="none" stroke="#5b6a72"/><ellipse cx="240" cy="108" rx="9" ry="16" fill="none" stroke="#5b6a72"/>
+<rect x="56" y="140" width="10" height="22" rx="4" fill="none" stroke="#5b6a72"/><rect x="314" y="140" width="10" height="22" rx="4" fill="none" stroke="#5b6a72"/>
+<circle cx="44" cy="118" r="5" fill="#c8361d"/><circle cx="336" cy="118" r="5" fill="#3f7d2a"/>
+<circle cx="46" cy="132" r="4" fill="#F1EFE8" stroke="#888780"/><circle cx="334" cy="132" r="4" fill="#F1EFE8" stroke="#888780"/>
+<circle cx="190" cy="150" r="5" fill="#c8361d" stroke="#A32D2D" stroke-width="1.5"/>
+<circle cx="190" cy="266" r="4" fill="#F1EFE8" stroke="#888780"/>
+<circle cx="160" cy="111" r="4" fill="#d99a12"/><circle cx="220" cy="111" r="4" fill="#d99a12"/>
+<circle cx="50" cy="300" r="5" fill="#c8361d"/><text class="ts" x="64" y="304">Bal szárnyvég: piros helyzetfény</text>
+<circle cx="50" cy="322" r="5" fill="#3f7d2a"/><text class="ts" x="64" y="326">Jobb szárnyvég: zöld helyzetfény</text>
+<circle cx="50" cy="344" r="4" fill="#F1EFE8" stroke="#888780"/><text class="ts" x="64" y="348">Farok fehér; szárnyvég strobe dupla villanás</text>
+<circle cx="50" cy="366" r="5" fill="#c8361d" stroke="#A32D2D" stroke-width="1.5"/><text class="ts" x="64" y="370">Törzs tetején: piros villogó (beacon)</text>
+<circle cx="50" cy="388" r="4" fill="#d99a12"/><text class="ts" x="64" y="392">Leszállófény: kint a futóval együtt</text></svg>

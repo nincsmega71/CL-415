@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 300" width="760" height="600" role="img"><title>CL-415 törzs oldalnézet futóaknákkal</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5b6a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><style>text{font-family:DejaVu Sans, Arial, Helvetica, sans-serif;fill:#1d2830}.th{font-size:14px;font-weight:bold}.ts{font-size:12px;fill:#5b6a72}.arr{stroke:#5b6a72;stroke-width:1.2;fill:none}.leader{stroke:#5b6a72;stroke-width:0.8;stroke-dasharray:3 3;fill:none}</style><rect width="380" height="300" fill="#ffffff"/><g transform="translate(0,0)"><line x1="30" y1="178" x2="350" y2="178" stroke="#378ADD" stroke-width="1" stroke-dasharray="5 4"/>
+<path d="M40 150 Q55 112 110 110 L330 110 L338 125 L210 188 L210 195 L90 195 Z" fill="none" stroke="#5b6a72" stroke-width="1.2"/>
+<polygon points="292,110 322,60 340,60 334,110" fill="none" stroke="#5b6a72"/>
+<line x1="300" y1="60" x2="345" y2="60" stroke="#5b6a72" stroke-width="2"/>
+<rect x="150" y="96" width="110" height="8" rx="2" fill="none" stroke="#5b6a72"/>
+<ellipse cx="165" cy="92" rx="22" ry="8" fill="none" stroke="#5b6a72"/>
+<line x1="140" y1="76" x2="140" y2="108" stroke="#5b6a72" stroke-width="2"/>
+<rect x="122" y="120" width="40" height="24" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<rect x="90" y="165" width="30" height="30" rx="2" fill="none" stroke="#D85A30" stroke-dasharray="3 2"/>
+<rect x="180" y="150" width="30" height="24" rx="2" fill="none" stroke="#D85A30" stroke-dasharray="3 2"/>
+<line x1="105" y1="195" x2="105" y2="224" stroke="#1d2830" stroke-width="2"/><circle cx="105" cy="232" r="8" fill="none" stroke="#1d2830" stroke-width="1.5"/>
+<line x1="195" y1="174" x2="195" y2="224" stroke="#1d2830" stroke-width="2"/><circle cx="195" cy="232" r="8" fill="none" stroke="#1d2830" stroke-width="1.5"/>
+<line x1="142" y1="120" x2="100" y2="68" class="leader"/><text class="ts" x="40" y="58">Elektronika, szervók: száraz tér</text>
+<line x1="105" y1="240" x2="105" y2="250" class="leader"/><text class="ts" x="40" y="262">Orrfutó: nedves akna</text>
+<line x1="195" y1="240" x2="195" y2="250" class="leader"/><text class="ts" x="180" y="262">Főfutó: oldalt, víz felett</text>
+<line x1="40" y1="282" x2="70" y2="282" stroke="#378ADD" stroke-dasharray="5 4"/><text class="ts" x="78" y="286">Vízvonal</text>
+<line x1="160" y1="282" x2="190" y2="282" stroke="#D85A30" stroke-dasharray="3 2"/><text class="ts" x="198" y="286">Futóakna (lezárt doboz)</text></g></svg>
