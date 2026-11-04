@@ -20,7 +20,7 @@ Az alkatrészlista: [BOM.md](BOM.md). A fényvezérlő firmware-je: [`firmware/c
 8. [Hajtás](#8-hajtás)
 9. [RC bekötés és telemetria](#9-rc-bekötés-és-telemetria)
 10. [Adó beállítása](#10-adó-beállítása)
-11. [Vízzárás és úszáspróba](#11-vízzárás-és-úszáspróba)
+11. [Vízzárás, úszáspróba és festés](#11-vízzárás-és-úszáspróba)
 12. [Végellenőrzés repülés előtt](#12-végellenőrzés-repülés-előtt)
 
 ---
@@ -275,6 +275,14 @@ A végleges légcsavarméretet wattmérővel ellenőrizd: teljes gáznál az ár
 2. A fedél alá tegyél habszivacs-tömítést, és rögzítsd szalaggal vagy mágnesekkel.
 3. **Kádpróba:** az akkut és az elektronikát vedd ki, helyettük tegyél be azonos tömegű nehezéket. Úsztasd a gépet 10 percig, majd ellenőrizd, hogy a törzsben nincs-e víz.
 4. Ellenőrizd a vízvonalat: a főfutó-aknák és a száraz tér legyenek felette.
+
+### 11.1 Festés és matricák
+
+A Canadair-stílusú sárga–piros festési séma és a matricaív: [CL-415_Canadair_festes_matrica.pdf](CL-415_Canadair_festes_matrica.pdf) (A3, 100%-os nyomtatás).
+
+1. Vízbázisú alapozó, majd sárga alapszín 2–3 vékony rétegben. Spray és oldószeres festék tilos, mert oldja az XPS-t.
+2. Maszkolás papírszalaggal, majd a piros felületek (vezérsík felső harmada, szárnyvégek, úszók, gondolaorrok), végül a fekete tükröződésgátló mező.
+3. Vinyl matricák felrakása, majd vízbázisú lakk az egészre. A lakk a matricákat is védi a víztől.
 
 ---
 

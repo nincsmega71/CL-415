@@ -80,7 +80,10 @@ void loop() {
   uint32_t last = lastPulseMs;
   interrupts();
 
-  bool signalOk = (pulseUs != 0) && (now - last) < SIGNAL_TIMEOUT_MS;
+  // Az időt a pillanatkép UTÁN olvassuk: ha a megszakítás közben frissítette
+  // a lastPulseMs-t, a "most - utolsó" különbség így nem fordulhat át negatívba.
+  uint32_t nowSig   = millis();
+  bool     signalOk = (p != 0) && (nowSig - last) < SIGNAL_TIMEOUT_MS;
   bool gearDown = signalOk && ((p > GEAR_THRESHOLD_US) == GEAR_DOWN_IS_HIGH);
 
   // Leszállófény lágy fel-/lefutással
