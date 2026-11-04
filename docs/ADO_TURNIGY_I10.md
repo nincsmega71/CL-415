@@ -14,6 +14,7 @@ A Turnigy TGY-i10 a FlySky FS-i10 Turnigy-márkás változata. AFHDS 2A protokol
 | Trimmek | 4 | digitális, középen magasabb hangú sípolás |
 | Kapcsolók | 8 (SwA–SwH) | a kézikönyv szerint SwA és SwF 3 állású, SwG rugós (visszaugró), a többi 2 állású |
 | Tekerők | 5 (VrA–VrE) | VrA, VrB, VrC felül; közülük három benyomva rögzíthető (elrejthető) |
+| Oldalsó karok | 2 | a bal és jobb oldal élén; ez nagy valószínűséggel a **VrD (bal) és VrE (jobb)**, arányos (fokozatmentes) kar |
 | Kijelző | 3,55" érintőképernyő | 240×400 képpont |
 | Egyéb | | USB (frissítés), trainer csatlakozó, SD-kártya foglalat (SD 2.0, legalább 1 GB) |
 
@@ -60,11 +61,17 @@ Az i10 gyári menüjéből a projekthez ezeket használjuk:
 - **SwE:** szabad. Mind a 10 csatorna foglalt, ezért ehhez csak akkor rendelhetünk funkciót, ha az adón belül keverjük egy meglévő csatornára (pl. a fénymód tekerője mellé).
 - **SwG (rugós):** időzítő indítás/nullázás.
 - **SwH:** kormánykitérés kicsi/nagy (dual rate).
-- **VrB, VrC:** szabadon maradnak finomhangolásra (pl. a differenciál tolóerő erőssége).
+- **VrB, VrC:** szabadon maradnak finomhangolásra.
+- **VrD (bal oldalsó kar):** a differenciál tolóerő erőssége. A keverő arányát erre a karra állítva vízen menet közben, a gázkar elengedése nélkül finomíthatod, mennyire fordítsák a motorok a gépet.
+- **VrE (jobb oldalsó kar):** szabad. Később jó lehet például a fékszárny finom állítására.
+
+**Az oldalsó karok azonosítása:** a *Display* menüben mozgasd meg a kart, és nézd meg, melyik Vr-érték változik. Ha a kar nem VrD/VrE-ként jelenik meg, a kiosztást ahhoz igazítjuk.
 
 **Megjegyzés a második csűrőhöz:** az *Airplane structure* menüben kétcsűrős szárnyat kell választani. Az i10 ilyenkor maga dönti el, melyik csatornán adja ki a második csűrőt. Ha nem a CH7-et választja, a táblázatot ahhoz igazítjuk, nem fordítva.
 
 ### Miért kerül a víz és a fény a XIAO-hoz?
+
+A részletek: [FEDELZETI_VEZERLO.md](FEDELZETI_VEZERLO.md).
 
 A merítőcső és az ürítőajtó egyetlen 3 állású kapcsolóról (CH9) megy. A XIAO dönti el, melyik szervót mozgatja: merítés állásban a cső kimegy, ürítés állásban a cső bemegy és az ajtók kinyílnak. Így egyszerre nem lehet meríteni és üríteni, és nem kell rá két csatorna.
 

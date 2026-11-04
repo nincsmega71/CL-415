@@ -1,6 +1,8 @@
 # Víztartály – mennyi vizet bír el a gép?
 
-Röviden: **400 ml biztonságosan, 500 ml jó körülmények között**, 600 ml felett vízről nem ajánlott felszállni. A 200 ml-es első ötletnél tehát kb. kétszer annyi is belefér.
+Röviden: **400 ml biztonságosan, 500 ml jó körülmények között**, 600 ml felett vízről nem ajánlott felszállni.
+
+> **Döntés: 500 ml-es tartállyal számolunk.** A gép 500 ml vízzel kb. 2,78 kg, a szárnyterhelés 69,5 g/dm². A kipróbálás lépcsőzetes marad (3. pont), az 500 ml az utolsó lépcső.
 
 ---
 

@@ -4,6 +4,8 @@ A kapcsolási rajz és a jelölések: [SZERELESI_UTMUTATO.md](SZERELESI_UTMUTATO
 
 ## Fényvezérlő
 
+> Ez a lista a v1 fényvezérlőé. Az FS-iA10B-hez tartozó v2 fedélzeti vezérlő ehhez képest változásai (+ Q4 MOSFET, 1N4148, 1 kΩ ×2, 33 kΩ + 10 kΩ akkuméréshez, i-BUS kábelek; − CH5 Y-kábel és osztó): [FEDELZETI_VEZERLO.md](FEDELZETI_VEZERLO.md#7-alkatrészek-a-v1-hez-képest).
+
 A szárnyban lévő LED-ek előtét-ellenállásai (R10–R15) a szárnyba, a LED mellé kerülnek.
 
 | Jel | Megnevezés | Érték / típus | Db | Megjegyzés |

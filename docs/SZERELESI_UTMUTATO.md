@@ -60,6 +60,8 @@ A hajótest aljára és a lépcsőre PP hullámlemez (coroplast) vagy üvegszöv
 
 ## 4. A fénypanel megépítése
 
+> **Frissítés:** az FS-iA10B vevőhöz a fedélzeti vezérlő **v2** változata tartozik (i-BUS, víz funkció, telemetria, kapcsolható helyzetfények). Kapcsolási rajz, lábkiosztás és firmware: [FEDELZETI_VEZERLO.md](FEDELZETI_VEZERLO.md). Az ebben a fejezetben és az 5–6. fejezetben leírt építési lépések (step-down beállítás, MOSFET-ek, LED-ek hűtése, vízzárás) változatlanul érvényesek; a lábkiosztás és a szárnycsatlakozók erezése a v2 szerint értendő.
+
 ![Kapcsolási rajz](img/kapcsolasi_rajz.svg)
 
 ### 4.1 Elrendezés
