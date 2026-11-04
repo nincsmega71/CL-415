@@ -7,7 +7,9 @@
 //  Mit csinál:
 //   1. i-BUS SERVO: egyetlen vezetéken olvassa mind a 10 csatornát.
 //   2. Fények: helyzetfény, villogó, strobe, leszállófény a csatornák szerint.
-//   3. Víz: merítőcső és ürítőajtó szervó a CH9 3 állású kapcsoló szerint.
+//   3. Víz: töltőnyílás (merítő) és ürítőajtó – két külön szervó egy csatornáról:
+//      CH9 alsó állás = töltőnyílás nyitva, középső = mindkettő zárva,
+//      felső = ürítőajtó nyitva.
 //   4. i-BUS SENS: saját szenzorként adatokat küld az i10 kijelzőjére.
 //   5. Jelvesztés: tartály zárva, fények keresési módban.
 //
@@ -58,7 +60,8 @@ const uint8_t TARTALY_TIPUS = T_UZEMANYAG;
 // Csatornák (1-től számozva, ahogy az adón)
 const uint8_t CH_FUTO   = 5;   // futómű, SwB
 const uint8_t CH_FLAP   = 6;   // fékszárny, SwA (3 állás)
-const uint8_t CH_VIZ    = 9;   // víz funkció, SwF (3 állás)
+const uint8_t CH_VIZ    = 9;   // víz funkció, SwF (3 állás): alsó merítés / közép zárva / felső ürítés
+const bool VIZ_KAPCSOLO_FORDITVA = false;  // true, ha a kapcsolón fordítva jön ki az alsó és a felső állás
 const uint8_t CH_FENY   = 10;  // fénymód, VrA tekerő
 
 const bool FUTO_LENT_HA_MAGAS = true;   // ha fordítva működik: false
@@ -283,7 +286,13 @@ void loop() {
   bool keresesi = voltKeret && !jelVan;   // volt jel, de elveszett
 
   // ---------------- Víz funkció ----------------
-  VizAllapot uj = jelVan ? (VizAllapot)harmad(ch(CH_VIZ)) : ZARVA;
+  // CH9: alsó = merítés (töltőnyílás nyitva), közép = zárva, felső = ürítés
+  VizAllapot uj = ZARVA;
+  if (jelVan) {
+    uint8_t h = harmad(ch(CH_VIZ));
+    if (VIZ_KAPCSOLO_FORDITVA) h = 2 - h;
+    uj = (h == 0) ? MERITES : (h == 2 ? URITES : ZARVA);
+  }
   if (uj == URITES && viz != URITES) uritesekSzama++;
   if (uj != MERITES) megtelt = false;
   viz = uj;

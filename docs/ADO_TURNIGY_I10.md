@@ -52,7 +52,7 @@ Az i10 gyári menüjéből a projekthez ezeket használjuk:
 | 6 | fékszárny | SwA (3 állás): fel / félig / le | 2 szervó, Y-kábel |
 | 7 | csűrő jobb | (csűrőkeverés) | szervó |
 | 8 | gáz jobb motor | bal bot + differenciál keverés | jobb ESC |
-| 9 | víz funkció | SwF (3 állás): zárva / merítés / ürítés | XIAO kezeli (i-BUS-ról olvas) |
+| 9 | víz funkció | SwF (3 állás): alsó = töltőnyílás nyitva / közép = mindkettő zárva / felső = ürítőajtó nyitva | XIAO kezeli, két külön szervóval |
 | 10 | fénymód | VrA tekerő: ki / helyzetfény / mind | XIAO kezeli (i-BUS-ról olvas) |
 
 **Kiegészítő kapcsolók (nem kell nekik csatorna):**
@@ -73,7 +73,9 @@ Az i10 gyári menüjéből a projekthez ezeket használjuk:
 
 A részletek: [FEDELZETI_VEZERLO.md](FEDELZETI_VEZERLO.md).
 
-A merítőcső és az ürítőajtó egyetlen 3 állású kapcsolóról (CH9) megy. A XIAO dönti el, melyik szervót mozgatja: merítés állásban a cső kimegy, ürítés állásban a cső bemegy és az ajtók kinyílnak. Így egyszerre nem lehet meríteni és üríteni, és nem kell rá két csatorna.
+A töltőnyílás és az ürítőajtó két külön szervóval működik, de egyetlen 3 állású kapcsolóról (CH9) kapják a parancsot. A XIAO dönti el, melyik szervót mozgatja: alsó állásban a töltőnyílás nyit, középen mindkettő zárva, felső állásban az ürítőajtó nyit. Alsóból felsőbe váltva a kapcsoló áthalad a középső álláson, így a két nyílás soha nincs egyszerre nyitva, és nem kell rá két csatorna.
+
+**Csak az i10-zel, XIAO nélkül** ugyanez két csatornát igényelne: a SwF-et két csatornára kellene rendelni egy-egy görbekeverővel (*Curve mix*), amelyek közül az egyik csak az alsó, a másik csak a felső állásban mozdul. Mivel mind a 10 csatorna foglalt, ezt a XIAO végzi.
 
 A fénymód (CH10) ugyanígy a XIAO-hoz fut; neki ehhez nem kell külön vezeték, az i-BUS-ról olvassa.
 
@@ -85,7 +87,7 @@ A fénymód (CH10) ugyanígy a XIAO-hoz fut; neki ehhez nem kell külön vezeté
 | 1, 2, 4, 7 (kormányok) | középállás, enyhe magassági és oldalkormány a lassú körözéshez |
 | 5 (futómű) | kiengedve |
 | 6 (fékszárny) | félig |
-| 9 (víz) | zárva (cső be, ajtók csukva) |
+| 9 (víz) | középállás (töltőnyílás és ürítőajtó zárva) |
 | 10 (fény) | minden fény be (könnyebb megtalálni a gépet) |
 
 A XIAO külön is figyeli a jelvesztést: ha az i-BUS-on nem jön adat, magától bezárja a tartályt és bekapcsolja a strobe-ot.

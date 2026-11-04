@@ -24,16 +24,16 @@ Firmware: [`firmware/cl415_vezerlo/cl415_vezerlo.ino`](../firmware/cl415_vezerlo
 
 A leszállófény lágyan, kb. 0,6 másodperc alatt kapcsol fel és le.
 
-### Víz funkció (CH9, SwF 3 állású kapcsoló)
+### Víz funkció (CH9, SwF 3 állású kapcsoló, két külön szervó)
 
-| Kapcsoló | Merítőcső | Ürítőajtók |
+| SwF állása | Töltőnyílás (merítő) szervó | Ürítőajtó szervó |
 |---|---|---|
-| **zárva** | behúzva | csukva |
-| **merítés** | kint; tele tartálynál magától behúzódik | csukva |
-| **ürítés** | behúzva | nyitva |
-| jelvesztés | behúzva | csukva |
+| **alsó** | nyitva; tele tartálynál magától zár | zárva |
+| **középső** | zárva | zárva |
+| **felső** | zárva | nyitva |
+| jelvesztés | zárva | zárva |
 
-Merítés és ürítés egyszerre nem lehetséges, mert ugyanaz a kapcsoló vezérli.
+Alsóból felsőbe váltva a kapcsoló áthalad a középső álláson, így a két nyílás soha nincs egyszerre nyitva. Ha a kapcsolón fordítva jön ki az alsó és a felső állás, a firmware elején `VIZ_KAPCSOLO_FORDITVA = true`, vagy az i10 *Reverse* menüjében fordítsd meg a CH9-et.
 
 ### Adatok az i10 kijelzőjén
 
@@ -115,7 +115,8 @@ A firmware a 6.3.2-es RP2040 csomaggal hiba és figyelmeztetés nélkül lefordu
 | `TARTALY_ML` | 500 | a tartály hasznos térfogata |
 | `MERITES_ML_PER_S` | 120 | a becslés alapja; próbával pontosítsd |
 | `VIZSZINT_ERZEKELO` | false | true, ha be van szerelve az elektróda |
-| `AJTO_*`, `MERITO_*` | 1100 / 1900 µs | a szervók végállásai |
+| `AJTO_*`, `MERITO_*` | 1100 / 1900 µs | a két szervó végállásai |
+| `VIZ_KAPCSOLO_FORDITVA` | false | ha az SwF alsó és felső állása fordítva hat |
 | `AKKU_KALIB` | 1.000 | multiméterrel összevetve finomítható |
 
 ## 5. Szenzortípus-teszt az i10-en
@@ -145,10 +146,10 @@ Nem tudjuk biztosan, hogy az i10 mely i-BUS szenzortípusokat írja ki. Ezt egys
 |---|---|---|
 | 5 | SwB | futómű; a leszállófény ezt figyeli |
 | 6 | SwA (3 állás) | fékszárny; a felső állás (>1700 µs) a „leszálló” |
-| 9 | SwF (3 állás) | zárva / merítés / ürítés |
+| 9 | SwF (3 állás) | alsó: töltőnyílás nyit / közép: mindkettő zárva / felső: ürítőajtó nyit |
 | 10 | VrA tekerő | fénymód: ki / normál / mind |
 
-**Failsafe:** CH9 = zárva, CH10 = mind. A vevő jelvesztéskor ezeket az értékeket küldi az i-BUS-on, így a tartály bezárul és minden fény ég. Ha a vevő failsafe nélkül teljesen elhallgat, a XIAO 0,5 másodperc után magától is keresési módba vált.
+**Failsafe:** CH9 = középállás (mindkettő zárva), CH10 = mind. A vevő jelvesztéskor ezeket az értékeket küldi az i-BUS-on, így a tartály bezárul és minden fény ég. Ha a vevő failsafe nélkül teljesen elhallgat, a XIAO 0,5 másodperc után magától is keresési módba vált.
 
 ## 7. Alkatrészek (a v1-hez képest)
 

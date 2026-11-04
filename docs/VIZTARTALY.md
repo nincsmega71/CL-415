@@ -79,7 +79,7 @@ Merítés közben a csövek fékezik a gépet, ezért teljes gázzal kell siklan
 
 ## 6. Hogyan kapcsolódik az elektronikához
 
-- A víz funkciót az adón **SwF (3 állás)** vezérli a **CH9**-en: zárva / merítés / ürítés.
+- A víz funkciót az adón **SwF (3 állás)** vezérli a **CH9**-en: alsó állás = töltőnyílás nyit, középső = mindkettő zárva, felső = ürítőajtó nyit. A két nyílás külön szervóval működik.
 - A merítőcső és az ajtó szervóját a **XIAO** mozgatja az i-BUS-ról kapott CH9 érték alapján (lásd [ADO_TURNIGY_I10.md](ADO_TURNIGY_I10.md)).
 - Jelvesztéskor a XIAO bezárja a tartályt és behúzza a csöveket.
 - Ha lesz vízszintérzékelő a tartályban, a töltöttséget a XIAO az adó kijelzőjére is elküldheti.
