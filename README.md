@@ -10,10 +10,10 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 |---|---|
 | Fesztáv | 1800 mm |
 | Szárnyfelület | kb. 40 dm² |
-| Súlycél | legfeljebb kb. 2,0 kg |
+| Súlycél | víz nélkül kb. 2,0–2,2 kg; 400–500 ml vízzel kb. 2,7–2,8 kg |
 | Anyag | 5 mm XPS padlóalátét, 3 mm rétegelt lemez, coroplast / üvegszövet a hajótest alján |
 | Hajtás | 2× 2830 1000–1100 kV, 2× 40 A ESC, 2× 8×6 négytollú (CW + CCW), 3S LiPo |
-| Rádió | Turnigy TGY-i10 adó, TGY-iA6B vevő, i-BUS telemetria (feszültség, hőmérséklet, fordulatszám) |
+| Rádió | Turnigy TGY-i10 adó, FlySky FS-iA10B vevő (10 csatorna), i-BUS telemetria (feszültség, hőmérséklet, fordulatszám) |
 | Futómű | behúzható, vízálló szervókkal mozgatva |
 | Fények | helyzetfények, piros villogó, strobe, leszállófény; Seeed XIAO RP2040 vezérlő |
 
@@ -22,6 +22,8 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 | Fájl | Tartalom |
 |---|---|
 | [docs/SZERELESI_UTMUTATO.md](docs/SZERELESI_UTMUTATO.md) | Szerelési útmutató: fénypanel, firmware, fények, futómű, hajtás, RC bekötés, vízzárás, festés, végellenőrzés |
+| [docs/ADO_TURNIGY_I10.md](docs/ADO_TURNIGY_I10.md) | Turnigy i10 adó és FS-iA10B vevő: kezelőszervek, funkciókiosztás, failsafe, telemetria |
+| [docs/VIZTARTALY.md](docs/VIZTARTALY.md) | Víztartály: mennyi vizet bír a gép, tartály, ürítés, merítés |
 | [docs/BOM.md](docs/BOM.md) | Alkatrészlista: fényvezérlő és teljes gép |
 | [docs/TERVEK_ES_FORRASOK.md](docs/TERVEK_ES_FORRASOK.md) | A Paper-Replika terv letöltései és további források |
 | [docs/elektronika.html](docs/elektronika.html) | Kapcsolási rajz és BOM egy oldalon (böngészőben megnyitható) |

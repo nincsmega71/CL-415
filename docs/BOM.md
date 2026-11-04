@@ -66,7 +66,7 @@ A mennyiségek a 180 cm-es Paper-Replika tervhez szólnak. A habmennyiség és a
 | – | ESC Y-kábel | JR, gázcsatornára | 1 | CH3 |
 | **RC és tápellátás** | | | | |
 | – | Adó | Turnigy TGY-i10 | 1 | **meglévő** |
-| – | Vevő | Turnigy TGY-iA6B | 1 | **meglévő** |
+| – | Vevő | FlySky FS-iA10B, 10 csatorna, i-BUS | 1 | a TGY-iA6B helyett |
 | – | UBEC | 5–6 V, min. 5 A | 1 | a vevő és a szervók tápja |
 | – | Szervó | 9 g, műanyag fogaskerekes | 7 | 2 csűrő, 1 magassági, 1 oldal, 1 vízikormány, 2 fékszárny |
 | – | Y-kábel | JR | 3 | csűrő, fékszárny, oldal + vízikormány |

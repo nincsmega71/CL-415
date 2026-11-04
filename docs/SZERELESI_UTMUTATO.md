@@ -230,6 +230,8 @@ A végleges légcsavarméretet wattmérővel ellenőrizd: teljes gáznál az ár
 
 ## 9. RC bekötés és telemetria
 
+> **Frissítés:** a vevő FS-iA10B-re cserélődik (10 csatorna, i-BUS). Az új funkciókiosztás és a failsafe: [ADO_TURNIGY_I10.md](ADO_TURNIGY_I10.md). Az alábbi táblázat a régi, 6 csatornás TGY-iA6B vevőre szól; a fényvezérlő i-BUS-os változata után ezt a fejezetet is átírjuk.
+
 ![Csatornakiosztás](img/csatorna_kiosztas.svg)
 
 | Csatorna | Funkció | Bekötés |
