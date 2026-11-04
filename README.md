@@ -24,6 +24,7 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 | [docs/SZERELESI_UTMUTATO.md](docs/SZERELESI_UTMUTATO.md) | Szerelési útmutató: fénypanel, firmware, fények, futómű, hajtás, RC bekötés, vízzárás, festés, végellenőrzés |
 | [docs/FEDELZETI_VEZERLO.md](docs/FEDELZETI_VEZERLO.md) | Fedélzeti vezérlő v2 (XIAO, i-BUS): működés, kapcsolási rajz, lábkiosztás, teszt, beállítás |
 | [docs/ADO_TURNIGY_I10.md](docs/ADO_TURNIGY_I10.md) | Turnigy i10 adó és FS-iA10B vevő: kezelőszervek, funkciókiosztás, failsafe, telemetria |
+| [docs/I10_FIRMWARE_ELEMZES.md](docs/I10_FIRMWARE_ELEMZES.md) | Az i10 gyári firmware-ének vizsgálata: mi módosítható, kockázatok, következő lépés |
 | [docs/VIZTARTALY.md](docs/VIZTARTALY.md) | Víztartály: mennyi vizet bír a gép, tartály, ürítés, merítés |
 | [docs/BOM.md](docs/BOM.md) | Alkatrészlista: fényvezérlő és teljes gép |
 | [docs/TERVEK_ES_FORRASOK.md](docs/TERVEK_ES_FORRASOK.md) | A Paper-Replika terv letöltései és további források |
