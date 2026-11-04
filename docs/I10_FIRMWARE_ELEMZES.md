@@ -32,6 +32,23 @@ Mellette egyszerű szövegként vannak a súgószövegek („Airplane structure�
 
 **Következmény:** a grafikák és a szövegek elvileg cserélhetők: azonos méretű képet ugyanarra a helyre írva, a programhoz nem kell hozzányúlni. Például saját indítókép, más színvilág, átrajzolt ikonok, magyar súgó.
 
+### 2.1 A képtáblázat megvan
+
+A programkódban a képeket 16 bájtos leírók írják le (ugyanaz az elv, mint a régi sprite-lapoknál):
+
+| Mező | Méret | Jelentés |
+|---|---|---|
+| cím | 4 bájt | a kép kezdete a flash-ben; a processzor a flash-t a **0x40000000** címtől látja |
+| szélesség | 4 bájt | képpont |
+| magasság | 4 bájt | képpont |
+| átlátszó szín | 4 bájt | általában 0xA897 (ez a szín nem rajzolódik ki) |
+
+A kép adata a megadott címtől kezdve soronként, szélesség × magasság × 2 bájt, tömörítetlen RGB565.
+
+**Eredmény:** 305 kép leírója, a 4 MB-os flash kb. 76%-a. A képek többsége hibátlanul kiexportálható: menüikonok, gombok, kapcsolók, mérőórák, görberácsok, a helikopter-tányérok rajzai, a repülőgép-típusválasztó képek, még a beépített 2,4 GHz-es spektrumelemző háttere is. Kb. 40–50 leíró hibás képet ad: ezek vagy nem képleírók (véletlen egyezés), vagy más formátumú (pl. betűkészlet vagy maszk) adatok. Ezeket külön kell majd megvizsgálni.
+
+**Mit jelent ez:** egy képcserélő eszköz megírható. A leíró megmondja, melyik képet hová és milyen méretben kell visszaírni, így a lecserélt kép pontosan a helyére kerül.
+
 ## 3. A program (a menük és a kijelzett adatok)
 
 - A kód **ARM (32 bites, nem Thumb) utasításkészletű**, és a 0x30000000-s címtől fut (külső RAM). Ez nem egy STM32 Cortex-M mikrovezérlő jellemzője, hanem egy erősebb, ARM7/ARM9 osztályú processzoré. Lehet, hogy mellette van egy STM32 is (pl. a botokhoz vagy a rádióhoz), de a kijelzőt és a menüket ez az ARM processzor futtatja.
@@ -62,7 +79,7 @@ Ha a frissítő felismeri az adót és megjeleníti az adatokat, a grafika cser�
 
 | Cél | Megvalósítható? | Nehézség |
 |---|---|---|
-| Saját grafika, színek, indítókép | valószínűleg igen | közepes; képcsere azonos méretben, saját frissítővel |
+| Saját grafika, színek, ikonok | igen, a képtáblázat ismert | közepes; képcsere azonos méretben, saját frissítővel |
 | Magyar súgó | valószínűleg igen | közepes; a szövegek hossza kötött |
 | Több kijelzett adat, új menük | elvileg igen | nagy; gépi kód visszafejtése |
 | Teljesen saját firmware | ebből az adóból nem reális | nagyon nagy |
