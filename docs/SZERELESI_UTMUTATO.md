@@ -179,6 +179,8 @@ A vezetékeket a szárny belsejében, a bordák között vezesd. Az XPS-be forr�
 
 A Paper-Replika terv levehető fix futót használ. A behúzható futóhoz a törzset ennek megfelelően kell kialakítani.
 
+> **Új, méretezett terv:** [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md). A főfutó a hajótest oldalán kilendülő paralelogramma-mechanizmus (akna nélkül), az orrfutó hátrafelé behúzható ikerkerekes. Mind a négy szervó (főfutó, orrfutó, ürítőajtók, merítőlapok) a száraz térben ül. Ahol az alábbi pontok eltérnek, a méretezett terv az érvényes.
+
 ### 7.1 Orrfutó-akna (nedves akna)
 
 1. A hajótest alján, az orrfutó helyén alakíts ki egy XPS dobozt, amely **kifelé nyitott, a törzs belseje felé teljesen zárt**.
@@ -242,7 +244,7 @@ A végleges légcsavarméretet wattmérővel ellenőrizd: teljes gáznál az ár
 | CH2 | magassági kormány | 1 szervó |
 | CH3 | gáz | 2 ESC, Y-kábel |
 | CH4 | oldalkormány | oldalkormány + vízikormány, Y-kábel |
-| CH5 | futómű | 3 futószervó + fénypanel jele, elosztóval |
+| CH5 | futómű | főfutó- és orrfutószervó, Y-kábellel |
 | CH6 | fékszárny | 2 szervó, Y-kábel |
 | B/VCC | táp | külön UBEC, 5–6 V, min. 5 A |
 | SENS (i-BUS) | telemetria | CVT01 → CTM01 → CPD01 láncban |

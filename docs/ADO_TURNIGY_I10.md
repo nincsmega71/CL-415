@@ -48,7 +48,7 @@ Az i10 gyári menüjéből a projekthez ezeket használjuk:
 | 2 | magassági kormány | jobb bot függőleges | szervó |
 | 3 | gáz bal motor | bal bot függőleges | bal ESC |
 | 4 | oldalkormány + vízikormány | bal bot vízszintes | 2 szervó, Y-kábel |
-| 5 | futómű | SwB (2 állás) | 3 futószervó, elosztóval |
+| 5 | futómű | SwB (2 állás) | főfutó- és orrfutószervó, Y-kábellel |
 | 6 | fékszárny | SwA (3 állás): fel / félig / le | 2 szervó, Y-kábel |
 | 7 | csűrő jobb | (csűrőkeverés) | szervó |
 | 8 | gáz jobb motor | bal bot + differenciál keverés | jobb ESC |

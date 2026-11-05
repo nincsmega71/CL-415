@@ -14,8 +14,8 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 | Anyag | 5 mm XPS padlóalátét, 3 mm rétegelt lemez, coroplast / üvegszövet a hajótest alján |
 | Hajtás | 2× 2830 1000–1100 kV, 2× 40 A ESC, 2× 8×6 négytollú (CW + CCW), 3S LiPo |
 | Rádió | Turnigy TGY-i10 adó, FlySky FS-iA10B vevő (10 csatorna), i-BUS telemetria (feszültség, hőmérséklet, fordulatszám) |
-| Futómű | behúzható, vízálló szervókkal mozgatva |
-| Fények és víz | helyzetfények, piros villogó, strobe, leszállófény; 500 ml-es víztartály merítőcsővel és ürítőajtóval; Seeed XIAO RP2040 vezérlő i-BUS-on |
+| Futómű | behúzható: oldalra kilendülő főfutó (nyomtáv kb. 331 mm), hátra behúzható ikerkerekes orrfutó, száraz térben ülő szervókkal |
+| Fények és víz | helyzetfények, piros villogó, strobe, leszállófény; 500 ml-es kétrekeszes víztartály merítőlapokkal és két ürítőajtóval; Seeed XIAO RP2040 vezérlő i-BUS-on |
 
 ## Dokumentáció
 
@@ -25,6 +25,8 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 | [docs/FEDELZETI_VEZERLO.md](docs/FEDELZETI_VEZERLO.md) | Fedélzeti vezérlő v2 (XIAO, i-BUS): működés, kapcsolási rajz, lábkiosztás, teszt, beállítás |
 | [docs/ADO_TURNIGY_I10.md](docs/ADO_TURNIGY_I10.md) | Turnigy i10 adó és FS-iA10B vevő: kezelőszervek, funkciókiosztás, failsafe, telemetria |
 | [docs/I10_FIRMWARE_ELEMZES.md](docs/I10_FIRMWARE_ELEMZES.md) | Az i10 gyári firmware-ének vizsgálata: mi módosítható, kockázatok, következő lépés |
+| [docs/FUTOMU_ES_TARTALY.md](docs/FUTOMU_ES_TARTALY.md) | Futómű és víztartály méretezett terve, SolidWorks-hez |
+| [cad/](cad/) | DXF alkatrészek, SolidWorks paraméterlista, generálóprogram |
 | [docs/VIZTARTALY.md](docs/VIZTARTALY.md) | Víztartály: mennyi vizet bír a gép, tartály, ürítés, merítés |
 | [docs/BOM.md](docs/BOM.md) | Alkatrészlista: fényvezérlő és teljes gép |
 | [docs/TERVEK_ES_FORRASOK.md](docs/TERVEK_ES_FORRASOK.md) | A Paper-Replika terv letöltései és további források |
@@ -39,7 +41,7 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 | | |
 |---|---|
 | ![Kapcsolási rajz v2](docs/img/kapcsolasi_rajz_v2.svg) | ![Szárnykábelezés](docs/img/szarny_kabelezes.svg) |
-| ![Csatornakiosztás](docs/img/csatorna_kiosztas.svg) | ![Futóaknák](docs/img/futoakna_oldalnezet.svg) |
+| ![Csatornakiosztás](docs/img/csatorna_kiosztas.svg) | ![Főfutó elölnézet](docs/img/futomu_elol.svg) |
 
 ## A sárkányszerkezet terve
 

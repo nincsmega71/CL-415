@@ -2,6 +2,8 @@
 
 Röviden: **400 ml biztonságosan, 500 ml jó körülmények között**, 600 ml felett vízről nem ajánlott felszállni.
 
+> **A méretezett terv:** [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md) (130 × 72 mm-es, V-fenekű, kétrekeszes tartály, kb. 557 ml; merítőlapok a merítőcsövek helyett). Az alábbi 4. pont az első, előzetes ötleteket írja le.
+
 > **Döntés: 500 ml-es tartállyal számolunk.** A gép 500 ml vízzel kb. 2,78 kg, a szárnyterhelés 69,5 g/dm². A kipróbálás lépcsőzetes marad (3. pont), az 500 ml az utolsó lépcső.
 
 ---
@@ -59,11 +61,13 @@ Az átesési sebesség a tömeg négyzetgyökével nő. 500 ml-rel a gép kb. 12
 
 ### Ürítés
 
-Két ajtó, egyenként kb. 60 × 40 mm, a hajótest alján, a lépcső előtt. Egyetlen szervó nyitja mindkettőt.
+Két ajtó, egyenként 50 × 34 mm, a V-fenék két felén, a lépcső előtt. Egyetlen szervó nyitja mindkettőt.
 
 Számolás szerint ekkora nyíláson az 500 ml kb. **0,3–0,5 másodperc** alatt kiömlik. Ez látványos, „egy csapásra” zúduló vízfelhő, mint az igazi gépnél.
 
 ### Merítés (feltöltés vízen)
+
+> **Módosítva:** a csövek helyett két csuklós merítőlap lesz (becslés: 0,3–0,45 l/s), lásd [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md#42-merítőlapok). Az eredeti csöves ötlet:
 
 Két behúzható, 6 mm belső átmérőjű cső a lépcső mögött, kicsit a víz alá nyúlva. Siklás közben a víz sebessége maga nyomja fel őket a tartályba.
 

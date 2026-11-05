@@ -69,7 +69,7 @@ const uint16_t FLAP_LESZALLO_FELETT = 1700;  // ennél nagyobb = leszálló fék
 
 // Víztartály
 const float TARTALY_ML         = 500.0f;  // tartály hasznos térfogata
-const float MERITES_ML_PER_S   = 120.0f;  // becsült töltési sebesség merítéskor (próbával pontosítsd)
+const float MERITES_ML_PER_S   = 300.0f;  // becsült töltési sebesség a két merítőlappal (próbával pontosítsd)
 const float URITES_ML_PER_S    = 1500.0f; // becsült ürítési sebesség
 const bool  VIZSZINT_ERZEKELO  = false;   // true, ha be van szerelve az elektróda
 const int   VIZSZINT_KUSZOB    = 2000;    // ADC érték alatt: víz éri az elektródát

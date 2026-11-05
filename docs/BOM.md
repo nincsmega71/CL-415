@@ -72,14 +72,24 @@ A mennyiségek a 180 cm-es Paper-Replika tervhez szólnak. A habmennyiség és a
 | – | UBEC | 5–6 V, min. 5 A | 1 | a vevő és a szervók tápja |
 | – | Szervó | 9 g, műanyag fogaskerekes | 7 | 2 csűrő, 1 magassági, 1 oldal, 1 vízikormány, 2 fékszárny |
 | – | Y-kábel | JR | 3 | csűrő, fékszárny, oldal + vízikormány |
-| – | Elosztó a CH5-re | JR, 1→4 | 1 | 3 futószervó + fénypanel jele |
+| – | Y-kábel a CH5-re | JR | 1 | főfutó- és orrfutószervó |
 | – | Szervó hosszabbító | 30 cm | 6 | a szárnyba |
 | **Futómű** | | | | |
-| – | Vízálló szervó | 9–12 g, fém fogaskerekes | 3 | futók mozgatása a száraz térből |
-| – | Futószár | 3 mm rugóacél drót | 1 | méter |
-| – | Főkerék | 45–55 mm, könnyű habkerék | 2 | db |
-| – | Orrkerék | 35–45 mm, könnyű habkerék | 1 | db |
-| – | Tömítő átvezetés | zsírozott sárgaréz cső + szilikon | 3 | tolórúd az aknafalon át |
+| – | Szervó | MG90S, fém fogaskerekes | 2 | főfutó (1, mindkét oldal) és orrfutó (1); száraz térben, ezért nem kell vízálló |
+| – | Alumínium lemez | 2 mm, kb. 100 × 100 mm | 1 | főfutó-karok (4 db) |
+| – | Alumínium zártszelvény | 8 × 8 mm | 1 | 20 cm; főfutó-lábak |
+| – | Rétegelt lemez | 3 mm | 1 | futómű-former, konzolfülek |
+| – | Főkerék | 62 mm, könnyű habkerék | 2 | db |
+| – | Orrkerék | 40 mm, könnyű habkerék | 2 | ikerkerék |
+| – | Csavarok | M3 csavar + önzáró anya | 12 | csuklók és tengelyek |
+| – | Gumiharang | kis, tolórúdhoz | 2 | a főfutó tolórúdjainak rése |
+| – | Tömítő átvezetés | zsírozott sárgaréz cső + szilikon | 1 | orrfutó tolórúdja |
+| **Víztartály** | | | | méretek: [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md) |
+| – | Szervó | MG90S | 2 | ürítőajtók (1), merítőlapok (1); a XIAO D5 és D9 lábán |
+| – | PETG vagy PET-lemez | 2 mm | 1 | tartály; vagy 3D-nyomtatva |
+| – | PET-lemez | 1 mm | 1 | ürítőajtók, merítőlapok |
+| – | Szilikon tömítőcsík | | 1 | ajtók |
+| – | Szilikoncső | 6–8 mm | 1 | szellőző/túlfolyó |
 | **Telemetria** | | | | |
 | – | Feszültségszenzor | TGY-CVT01 | 1 | **meglévő** |
 | – | Hőmérsékletszenzor | TGY-CTM01 | 1 | **meglévő** ESC hűtőbordára |
