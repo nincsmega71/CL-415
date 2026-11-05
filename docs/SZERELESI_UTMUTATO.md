@@ -213,9 +213,10 @@ A szervók lassabb mozgatásához használhatod az adó szervósebesség-állít
 
 ### 7.5 Futószárak és kerekek
 
-- Futószár: 3 mm-es rugóacél drót, hajlítva.
-- Főkerék 45–55 mm, orrkerék 35–45 mm, könnyű habkerék.
-- A kerékagyakat rögzítőgyűrűvel vagy forrasztott alátéttel biztosítsd.
+- Főkerék: 62 mm átmérő (2,5"), kb. 22 mm széles, kerekenként 2 db 693-2RS (3×8×4 mm) rozsdamentes csapágy.
+- Orrkerék: 2× 40 mm (kb. 1,5"), kb. 15 mm széles, kerekenként 2 db MR63-2RS (3×6×2,5 mm) vagy 683-2RS (3×7×3 mm) rozsdamentes csapágy.
+- Tengely: 3 mm-es rozsdamentes illesztett csavar vagy csap, a két csapágy között távtartó hüvellyel; a kereket alátét és önzáró anya fogja.
+- A főfutó lába 8×8 mm-es alumínium zártszelvény, az orrfutóé 3 mm-es alumíniumlemez (lásd [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md)).
 
 ---
 

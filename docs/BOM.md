@@ -79,9 +79,12 @@ A mennyiségek a 180 cm-es Paper-Replika tervhez szólnak. A habmennyiség és a
 | – | Alumínium lemez | 2 mm, kb. 100 × 100 mm | 1 | főfutó-karok (4 db) |
 | – | Alumínium zártszelvény | 8 × 8 mm | 1 | 20 cm; főfutó-lábak |
 | – | Rétegelt lemez | 3 mm | 1 | futómű-former, konzolfülek |
-| – | Főkerék | 62 mm, könnyű habkerék | 2 | db |
-| – | Orrkerék | 40 mm, könnyű habkerék | 2 | ikerkerék |
+| – | Főkerék | 62 mm (2,5"), kb. 22 mm széles, könnyű hab- vagy PU-kerék | 2 | db |
+| – | Orrkerék | 40 mm (kb. 1,5"), kb. 15 mm széles | 2 | ikerkerék |
 | – | Csavarok | M3 csavar + önzáró anya | 12 | csuklók és tengelyek |
+| – | Csapágy | 693-2RS, 3×8×4 mm, rozsdamentes | 4 | főkerekek (kerekenként 2) |
+| – | Csapágy | MR63-2RS 3×6×2,5 vagy 683-2RS 3×7×3, rozsdamentes | 4 | orrkerekek (kerekenként 2) |
+| – | Tengely | 3 mm rozsdamentes illesztett csavar vagy csap + távtartó hüvely | 4 | kerekenként 1 |
 | – | Gumiharang | kis, tolórúdhoz | 2 | a főfutó tolórúdjainak rése |
 | – | Tömítő átvezetés | zsírozott sárgaréz cső + szilikon | 1 | orrfutó tolórúdja |
 | **Víztartály** | | | | méretek: [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md) |
