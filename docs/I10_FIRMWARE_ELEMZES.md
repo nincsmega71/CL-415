@@ -49,6 +49,15 @@ A kép adata a megadott címtől kezdve soronként, szélesség × magasság × 
 
 **Mit jelent ez:** egy képcserélő eszköz megírható. A leíró megmondja, melyik képet hová és milyen méretben kell visszaírni, így a lecserélt kép pontosan a helyére kerül.
 
+### 2.2 A Turnigy-változat (a saját adón futó firmware)
+
+Az adón: **TGY-i10, szoftver 1.08-TGY (2016.05.11.), hardver 2.1.** A FlySky frissítője a Turnigy-márkás adót nem ismeri fel (más a gyártói kód), ezért a Turnigy saját frissítőjét vizsgáltam: `Turnigy TGY-i10 firmware 1.0.8.0 update.exe`.
+
+- Ugyanaz a felépítés: `HK-i10_Code.binz` (program, 357 KB) és `HK-i10_Data.binz` (4 MB adat), titkosítás nélkül, zlib-tömörítéssel.
+- Ugyanaz a 16 bájtos képleíró formátum: **302 kép**, a menük, ikonok, mérőórák, görberácsok és a kezdőképernyő (RX/TX telemetria-háttér) hibátlanul kiexportálható. A Turnigy-változatban a multikopter-típus képei is benne vannak.
+- **A képek címei teljesen eltérnek a FlySky-változattól** (egyetlen közös cím sincs, mind az 1024 blokk különbözik). A képcserélő eszköznek ezért a Turnigy-firmware saját táblázatával kell dolgoznia.
+- A frissítő ugyanúgy tiltja a régebbi verzió feltöltését. A saját adódon már ugyanez az 1.0.8.0 fut; hogy azonos verziót újra feltölt-e, azt még ki kell deríteni.
+
 ## 3. A program (a menük és a kijelzett adatok)
 
 - A kód **ARM (32 bites, nem Thumb) utasításkészletű**, és a 0x30000000-s címtől fut (külső RAM). Ez nem egy STM32 Cortex-M mikrovezérlő jellemzője, hanem egy erősebb, ARM7/ARM9 osztályú processzoré. Lehet, hogy mellette van egy STM32 is (pl. a botokhoz vagy a rádióhoz), de a kijelzőt és a menüket ez az ARM processzor futtatja.
