@@ -395,10 +395,10 @@ for k in range(3):
 save(d, m, 'merito_lap.dxf', 'Meritolap racsos nyilassal 20x17 - 2 db; elso elen csuklos, 25-30 fokot nyilik a vizbe')
 
 # ------------------------------------------------------------------ paraméterlista SolidWorkshöz
-lines = ['" SolidWorks globalis valtozok (Eszkozok > Egyenletek > Import). Minden ertek mm vagy fok."']
+lines = ["' SolidWorks globalis valtozok (Eszkozok > Egyenletek > Importalas). Minden ertek mm vagy fok."]
 for k, v in P.items():
     lines.append(f'"{k}" = {v}')
-lines += ['', '" Szamitott ertekek"', f'"fo_tengely_behuzva_x" = {ret[2][0]:.1f}', f'"fo_tengely_behuzva_y" = {ret[2][1]:.1f}',
+lines += ["' Szamitott ertekek", f'"fo_tengely_behuzva_x" = {ret[2][0]:.1f}', f'"fo_tengely_behuzva_y" = {ret[2][1]:.1f}',
           f'"fo_tengely_kiengedve_x" = {ext[2][0]:.1f}', f'"fo_tengely_kiengedve_y" = {ext[2][1]:.1f}',
           f'"nyomtav" = {2*ext[2][0]:.1f}', f'"kulso_oldalfal_x" = {xs}']
 open(os.path.join(CAD, 'cl415_parameterek.txt'), 'w', encoding='utf-8').write('\n'.join(lines) + '\n')

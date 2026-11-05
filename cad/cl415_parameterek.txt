@@ -1,4 +1,4 @@
-" SolidWorks globalis valtozok (Eszkozok > Egyenletek > Import). Minden ertek mm vagy fok."
+' SolidWorks globalis valtozok (Eszkozok > Egyenletek > Importalas). Minden ertek mm vagy fok.
 "torzs_belso_szel" = 155.0
 "fal" = 5.0
 "chine_mag" = 34.0
@@ -34,8 +34,7 @@
 "ajto_szel" = 34.0
 "merito_nyilas_sz" = 15.0
 "merito_nyilas_h" = 10.0
-
-" Szamitott ertekek"
+' Szamitott ertekek
 "fo_tengely_behuzva_x" = 108.1
 "fo_tengely_behuzva_y" = 99.7
 "fo_tengely_kiengedve_x" = 165.4
