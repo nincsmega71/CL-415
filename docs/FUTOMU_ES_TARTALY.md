@@ -4,8 +4,9 @@ Ez a fejezet a behúzható futóművet és az 500 ml-es víztartályt írja le �
 
 - méretezett rajzok (`docs/img/`);
 - a sík alkatrészek DXF-ben (`cad/dxf/`), 1:1 méretben, mm-ben;
+- 3D alkatrészek és összeállítások STEP-ben (`cad/step/`), a nyomtatható részek STL-ben is;
 - paraméterlista a SolidWorks egyenletkezelőjéhez (`cad/cl415_parameterek.txt`);
-- a generáló program (`cad/gen_futomu_tartaly.py`). Ha egy méret változik, ezzel minden rajz és DXF újra előállítható.
+- a generáló programok (`cad/gen_futomu_tartaly.py` a rajzokhoz és DXF-hez, `cad/gen_step.py` a STEP-hez). Ha egy méret változik, ezzel minden rajz és DXF újra előállítható.
 
 A törzs méretei a Paper-Replika terv formereiből vannak lemérve (belső szélesség 155 mm, V-fenék kb. 24°-os hajlással, a chine kb. 34 mm-rel a gerinc felett).
 
@@ -63,13 +64,17 @@ Párhuzamos karos (paralelogramma) mechanizmus a hajótest oldalán, mint az iga
 |---|---|---|---|
 | Alsó kar | 2 mm alumínium, 10 mm széles | 2 | `fofuto_kar_also.dxf` |
 | Felső kar füllel | 2 mm alumínium | 2 | `fofuto_kar_felso.dxf` |
-| Konzolfül | 3 mm rétegelt lemez vagy 2 mm alumínium | 4 (oldalanként 2) | `fofuto_konzol_ful.dxf` |
-| Láb | 8×8 mm alumínium zártszelvény, 72 mm | 2 | `fofuto_lab_furatok.dxf` (furatkép) |
+| Konzolfül | 3 mm rétegelt lemez | 4 (oldalanként 2) | `fofuto_konzol_ful.dxf` |
+| Láb | 8×8 mm alumínium zártszelvény, 68 mm | 2 | `fofuto_lab_furatok.dxf` (furatkép) |
 | Futómű-former | 3 mm rétegelt lemez | 1 | `fofuto_former.dxf` |
 | Csuklók | M3 csavar, önzáró anya, alátét | 8 | – |
 | Tengely | M3 csavar, kerékagy-rögzítő | 2 | – |
 
-A konzolfülek nyelve a hajótest oldalfalán átmenő résen át a futómű-former szélébe vágott horonyba ül, epoxival ragasztva. Így a leszállás terhelése a formerre jut, nem a habra.
+A két konzolfül a futómű-former első és hátsó lapjára ragad (20 mm-es nyelvvel, epoxival), és a hajótest oldalfalán vágott kb. 9 × 38 mm-es résen át 8,5 mm-re kiáll. A két fül között, a former vastagságának megfelelő 3 mm-es résben forognak a karok (2 mm vastagok, két oldalt egy-egy alátéttel). Így a leszállás terhelése a formerre jut, nem a habra.
+
+Rétegek elölről hátrafelé (z irányban): első konzolfül – kar – hátsó konzolfül. A láb a karok elé, közvetlenül a kar első lapjára csavarozódik. A rés a vízvonal felett (y = 56–94 mm) van; a fülek körül epoxival, a karok körül szilikonnal zárd le, hogy fröccsenő víz ne jusson a törzsbe.
+
+Behúzott helyzetben a láb alja 2 mm-rel a konzolfül teteje felett áll meg, ezért a fülek magassága (y = 56–94 mm) ne legyen nagyobb.
 
 ## 3. Orrfutó
 
@@ -148,7 +153,25 @@ A főfutó a súlypont mögött kb. 24°-kal van. Így a gép nem ül a farkára
 
 Mind a négy szervó a száraz térben ül, ezért nem kell vízálló típus.
 
-## 7. SolidWorks-ben
+## 7. 3D modellek (STEP)
+
+![STEP előnézet](img/step_elonezet.png)
+
+| Fájl | Tartalom |
+|---|---|
+| `cad/step/fofuto_kiengedve.step` | főfutó-összeállítás kiengedve: former, 4 konzolfül, 4 kar, 2 láb, 2 kerék csapágyakkal, távtartóval, tengellyel |
+| `cad/step/fofuto_behuzva.step` | ugyanez behúzva |
+| `cad/step/orrfuto.step` | orrfutó-láb 2 kerékkel (kiengedve, a csukló az origóban) |
+| `cad/step/tartaly.step` | tartály válaszfallal és ajtónyílásokkal, fedél, 2 ürítőajtó |
+| `cad/step/alkatreszek/` | minden alkatrész külön STEP-ben; a tartály, a fedél, a merítőlap és a kerekek STL-ben is, 3D-nyomtatáshoz |
+
+Megnyitás SolidWorksben: **File → Open**, fájltípus **STEP**. Az összeállítások összeállításként nyílnak meg, minden alkatrész külön, saját színnel. A koordináták az 1. pont szerintiek (a Z tengely előre mutat).
+
+A kerekek egyszerűsített modellek: 62 × 22 mm-es főkerék 8 mm-es, 4 mm mély csapágyfészekkel (693) mindkét oldalon, és 40 × 15 mm-es orrkerék 6 mm-es, 2,5 mm mély fészekkel (MR63). Ha kész kereket veszel, a modellt a megvett kerék méreteihez igazítsd.
+
+A tartály 2 mm-es fallal kb. 73 cm³ PETG, ami kb. 95 g. Ha könnyíteni kell, 1,5 mm-es fallal is vízzáró, ha epoxival lekened.
+
+## 8. SolidWorks-ben
 
 1. **Paraméterek:** Eszközök → Egyenletek → Importálás, és válaszd a `cad/cl415_parameterek.txt` fájlt. A méreteket ezekre a globális változókra kötheted; ha egy változik, a modell követi.
 2. **Sík alkatrészek:** Fájl → Megnyitás → DXF → „Importálás új alkatrészbe vázlatként”, mértékegység mm. Rétegek:

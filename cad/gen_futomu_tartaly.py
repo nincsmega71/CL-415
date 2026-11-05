@@ -109,7 +109,7 @@ def gear(side, a_deg, colr, label):
     Au = m((P['fo_csuklo_x'], P['fo_felso_csuklo_y'])); Al = m((P['fo_csuklo_x'], P['fo_also_csuklo_y']))
     s = ''
     # konzol a falon
-    s += f'<rect x="{min(T(*m((xs,62)))[0],T(*m((xs+8,94)))[0])}" y="{T(0,96)[1]}" width="{8*S}" height="{36*S}" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>'
+    s += f'<rect x="{min(T(*m((xs,62)))[0],T(*m((xs+8.5,94)))[0])}" y="{T(0,94)[1]}" width="{8.5*S}" height="{38*S}" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>'
     s += pl([Au, m(Bu)], stroke=COL['arm'], stroke_width=4)
     s += pl([Al, m(Bl)], stroke=COL['arm'], stroke_width=4)
     top = m(Bu); top = (top[0], top[1] + 6)
@@ -146,7 +146,7 @@ b += f'<text class="t" x="{T(0,0)[0]}" y="{T(0,0)[1]+14}" text-anchor="middle">g
 ly = 640
 leg = [(COL['arm'], 'kar: 70 mm csuklótávolság, 2 mm alumínium (oldalanként 2 db)'),
        (COL['wheel'], 'láb: 8×8 mm alumínium zártszelvény, 3 mm-es tengelycsavar'),
-       ('#5F5E5A', 'konzol: 8 mm-re kiálló fül a hajótest oldalán, a vízvonal felett'),
+       ('#5F5E5A', 'konzol: 2 fül oldalanként, a former két lapjára ragasztva, 8,5 mm-re kiáll a falból'),
        (COL['ret'], 'csuklók: M3 csavar + önzáró anya; forgás 110°')]
 for k, (c, t) in enumerate(leg):
     b += f'<rect x="40" y="{ly+k*20-10}" width="16" height="10" fill="{c}"/><text class="t" x="64" y="{ly+k*20}">{t}</text>'
@@ -333,26 +333,25 @@ d, m = new_doc(); slot_part(m, 70, 10, [(0, 0, 3.2), (70, 0, 3.2)])
 m.add_lwpolyline([(-5, 0), (-5, -14), (5, -14), (5, 0)], dxfattribs={'layer': 'KONTUR'})
 m.add_circle((0, -10), 1.0, dxfattribs={'layer': 'FURAT'})
 save(d, m, 'fofuto_kar_felso.dxf', 'Fofuto felso kar fullel (tolorud 2 mm-es Z-hajlitas, 10 mm) - 2 mm Al - 2 db')
-# konzol fül: 14 × 40, csuklók 24 mm-re egymástól, 3,5 mm-re a fal síkjától; 6 mm-es beragasztó nyelv
+# konzol fül: 8,5 × 38, csuklók 24 mm-re egymástól, 3,5 mm-re a fal síkjától; 20 mm-es nyelv a former lapjára ragasztva
 d, m = new_doc()
-m.add_lwpolyline([(-6, -8), (0, -8), (0, -14), (14, -14), (14, 38), (0, 38), (0, 32), (-6, 32), (-6, -8)], close=True, dxfattribs={'layer': 'KONTUR'})
+m.add_lwpolyline([(-20, -8), (0, -8), (0, -10), (8.5, -10), (8.5, 28), (0, 28), (0, 24), (-20, 24), (-20, -8)], close=True, dxfattribs={'layer': 'KONTUR'})
 m.add_circle((3.5, 0), 1.6, dxfattribs={'layer': 'FURAT'}); m.add_circle((3.5, 24), 1.6, dxfattribs={'layer': 'FURAT'})
-save(d, m, 'fofuto_konzol_ful.dxf', 'Konzol ful - 3 mm retegelt lemez vagy 2 mm Al - oldalankent 2 db (kar ele es moge) - x=0 a kulso falsik')
+save(d, m, 'fofuto_konzol_ful.dxf', 'Konzol ful - 3 mm retegelt lemez - oldalankent 2 db, a former elso es hatso lapjara ragasztva, kozottuk a karok - x=0 a kulso falsik')
 # láb fúrási sablon (8×8 Al cső)
 d, m = new_doc()
-m.add_lwpolyline([(0, -6), (8, -6), (8, 66), (0, 66)], close=True, dxfattribs={'layer': 'KONTUR'})
+m.add_lwpolyline([(0, -4), (8, -4), (8, 64), (0, 64)], close=True, dxfattribs={'layer': 'KONTUR'})
 for y, dd in ((0, 3.2), (36, 3.2), (60, 3.2)):
     m.add_circle((4, y), dd / 2, dxfattribs={'layer': 'FURAT'})
-save(d, m, 'fofuto_lab_furatok.dxf', 'Lab: 8x8 Al zartszelveny 72 mm. y=0 tengely (oldalirany), y=36 es y=60 csuklo (elore-hatra)')
+save(d, m, 'fofuto_lab_furatok.dxf', 'Lab: 8x8 Al zartszelveny 68 mm. y=0 tengely (oldalirany), y=36 es y=60 csuklo (elore-hatra)')
 # futómű-former (a Paper-Replika F8-hoz illesztve): gerinc y=0, chine 34, oldal 171
 d, m = new_doc()
 hwf = P['torzs_belso_szel'] / 2
 m.add_lwpolyline([(0, 0), (hwf, 33.3), (hwf, 171), (-hwf, 171), (-hwf, 33.3)], close=True, dxfattribs={'layer': 'KONTUR'})
 m.add_lwpolyline([(-11.4, 89), (11.4, 89), (11.4, 101.2), (-11.4, 101.2)], close=True, dxfattribs={'layer': 'KONTUR'})
 for sx in (-1, 1):
-    m.add_lwpolyline([(sx * 30, 70), (sx * 66, 70), (sx * 66, 150), (sx * 30, 150)], close=True, dxfattribs={'layer': 'KONTUR'})
-    m.add_lwpolyline([(sx * 77.5, 60), (sx * 72.5, 60), (sx * 72.5, 96), (sx * 77.5, 96)], dxfattribs={'layer': 'KONTUR'})
-save(d, m, 'fofuto_former.dxf', 'Fofuto-former 3 mm retegelt lemez. Kozepen 9 g-os szervo kivagas (22,8x12,2). Oldalt ablak a tolorudnak; a szelen 5x36 mm-es horony a konzolfulek nyelvenek.')
+    m.add_lwpolyline([(sx * 30, 70), (sx * 58, 70), (sx * 58, 150), (sx * 30, 150)], close=True, dxfattribs={'layer': 'KONTUR'})
+save(d, m, 'fofuto_former.dxf', 'Fofuto-former 3 mm retegelt lemez. Kozepen 9 g-os szervo kivagas (22,8x12,2). Oldalt ablak a tolorudnak; a konzolfulek nyelve a szelen mindket lapra ragad.')
 # orrfutó láb (oldalnézeti lemez)
 d, m = new_doc()
 L0 = P['orr_lab_hossz']

@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461350.809826389
+2461350.829201389
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461350.809826389
+2461350.829201389
   9
 $TDUUPDATE
  40
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{429ECB93-A11B-46C5-9E28-15D3420F9317}
+{17F0F521-BC0D-47F2-B83E-7DD5199DEB2E}
   9
 $VERSIONGUID
   2
-{9A0F7ED0-5709-4179-AE76-CD8392F6B8B4}
+{FAB0E35E-89AE-43D9-BAA8-62CF2CD1BCF7}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -5297,7 +5297,7 @@ AcDbPolyline
  70
 1
  10
--6.0
+-20.0
  20
 -8.0
  10
@@ -5307,29 +5307,29 @@ AcDbPolyline
  10
 0.0
  20
--14.0
+-10.0
  10
-14.0
+8.5
  20
--14.0
+-10.0
  10
-14.0
+8.5
  20
-38.0
+28.0
  10
 0.0
  20
-38.0
+28.0
  10
 0.0
  20
-32.0
+24.0
  10
--6.0
+-20.0
  20
-32.0
+24.0
  10
--6.0
+-20.0
  20
 -8.0
   0
@@ -5393,7 +5393,7 @@ AcDbText
  40
 3.0
   1
-Konzol ful - 3 mm retegelt lemez vagy 2 mm Al - oldalankent 2 db (kar ele es moge) - x=0 a kulso falsik
+Konzol ful - 3 mm retegelt lemez - oldalankent 2 db, a former elso es hatso lapjara ragasztva, kozottuk a karok - x=0 a kulso falsik
  11
 0.0
  21
@@ -6505,7 +6505,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:26:09.691950+00:00
+1.4.5 @ 2026-11-05T18:54:03.500374+00:00
   0
 VISUALSTYLE
   5
@@ -7217,7 +7217,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:26:09.694237+00:00
+1.4.5 @ 2026-11-05T18:54:03.503450+00:00
   0
 ENDSEC
   0

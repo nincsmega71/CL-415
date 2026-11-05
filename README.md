@@ -26,7 +26,7 @@ Kétmotoros, kefe nélküli hajtású Canadair CL-415 RC modell XPS habból, beh
 | [docs/ADO_TURNIGY_I10.md](docs/ADO_TURNIGY_I10.md) | Turnigy i10 adó és FS-iA10B vevő: kezelőszervek, funkciókiosztás, failsafe, telemetria |
 | [docs/I10_FIRMWARE_ELEMZES.md](docs/I10_FIRMWARE_ELEMZES.md) | Az i10 gyári firmware-ének vizsgálata: mi módosítható, kockázatok, következő lépés |
 | [docs/FUTOMU_ES_TARTALY.md](docs/FUTOMU_ES_TARTALY.md) | Futómű és víztartály méretezett terve, SolidWorks-hez |
-| [cad/](cad/) | DXF alkatrészek, SolidWorks paraméterlista, generálóprogram |
+| [cad/](cad/) | DXF és STEP alkatrészek, összeállítások, SolidWorks paraméterlista, generálóprogramok |
 | [docs/VIZTARTALY.md](docs/VIZTARTALY.md) | Víztartály: mennyi vizet bír a gép, tartály, ürítés, merítés |
 | [docs/BOM.md](docs/BOM.md) | Alkatrészlista: fényvezérlő és teljes gép |
 | [docs/TERVEK_ES_FORRASOK.md](docs/TERVEK_ES_FORRASOK.md) | A Paper-Replika terv letöltései és további források |

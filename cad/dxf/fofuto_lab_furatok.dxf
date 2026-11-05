@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461350.809826389
+2461350.829201389
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461350.809826389
+2461350.829201389
   9
 $TDUUPDATE
  40
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{A9B57CDE-D1F6-48AD-8AA4-75796AF92DD4}
+{084529B9-0597-490C-8292-C3A4A9EFD7B3}
   9
 $VERSIONGUID
   2
-{3743D491-5007-41D7-99D8-27DF144A4D50}
+{37B2FE00-6663-41E6-9840-FD0ACD6EBC87}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -5299,19 +5299,19 @@ AcDbPolyline
  10
 0.0
  20
--6.0
+-4.0
  10
 8.0
  20
--6.0
+-4.0
  10
 8.0
  20
-66.0
+64.0
  10
 0.0
  20
-66.0
+64.0
   0
 CIRCLE
   5
@@ -5393,7 +5393,7 @@ AcDbText
  40
 3.0
   1
-Lab: 8x8 Al zartszelveny 72 mm. y=0 tengely (oldalirany), y=36 es y=60 csuklo (elore-hatra)
+Lab: 8x8 Al zartszelveny 68 mm. y=0 tengely (oldalirany), y=36 es y=60 csuklo (elore-hatra)
  11
 0.0
  21
@@ -6505,7 +6505,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:26:09.698739+00:00
+1.4.5 @ 2026-11-05T18:54:03.509275+00:00
   0
 VISUALSTYLE
   5
@@ -7217,7 +7217,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:26:09.701311+00:00
+1.4.5 @ 2026-11-05T18:54:03.512009+00:00
   0
 ENDSEC
   0
