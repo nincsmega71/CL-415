@@ -2,7 +2,7 @@
 
 Röviden: **400 ml biztonságosan, 500 ml jó körülmények között**, 600 ml felett vízről nem ajánlott felszállni.
 
-> **A méretezett terv:** [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md) (130 × 72 mm-es, V-fenekű, kétrekeszes tartály, kb. 557 ml; merítőlapok a merítőcsövek helyett). Az alábbi 4. pont az első, előzetes ötleteket írja le.
+> **A méretezett terv:** [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md) (81 × 72 × 124 mm-es, V-fenekű, kétrekeszes tartály a két futóakna között, kb. 557 ml; merítőlapok a merítőcsövek helyett). Az alábbi 4. pont az első, előzetes ötleteket írja le.
 
 > **Döntés: 500 ml-es tartállyal számolunk.** A gép 500 ml vízzel kb. 2,78 kg, a szárnyterhelés 69,5 g/dm². A kipróbálás lépcsőzetes marad (3. pont), az 500 ml az utolsó lépcső.
 

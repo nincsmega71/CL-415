@@ -72,20 +72,24 @@ A mennyiségek a 180 cm-es Paper-Replika tervhez szólnak. A habmennyiség és a
 | – | UBEC | 5–6 V, min. 5 A | 1 | a vevő és a szervók tápja |
 | – | Szervó | 9 g, műanyag fogaskerekes | 7 | 2 csűrő, 1 magassági, 1 oldal, 1 vízikormány, 2 fékszárny |
 | – | Y-kábel | JR | 3 | csűrő, fékszárny, oldal + vízikormány |
-| – | Y-kábel a CH5-re | JR | 1 | főfutó- és orrfutószervó |
+| – | Futómű-vezérlő | Seeed XIAO RP2040 (második) | 1 | a CH5 jeléből mozgatja a főfutó 4 és az orrfutó 1 szervóját; `firmware/cl415_futomu` |
+| – | Y-kábel | JR | 2 | 2 behúzó és 2 reteszelő szervó párosítva |
 | – | Szervó hosszabbító | 30 cm | 6 | a szárnyba |
 | **Futómű** | | | | |
-| – | Szervó | MG90S, fém fogaskerekes | 2 | főfutó (1, mindkét oldal) és orrfutó (1); száraz térben, ezért nem kell vízálló |
-| – | Alumínium lemez | 2 mm, kb. 100 × 100 mm | 1 | főfutó-karok (4 db) |
-| – | Alumínium zártszelvény | 8 × 8 mm | 1 | 20 cm; főfutó-lábak |
-| – | Rétegelt lemez | 3 mm | 1 | futómű-former, konzolfülek |
+| – | Szervó | MG90S, fém fogaskerekes | 5 | főfutó: 2 behúzó + 2 reteszelő; orrfutó: 1; mind száraz térben, ezért nem kell vízálló |
+| – | Alumínium lemez | 2 mm, kb. 150 × 120 mm | 1 | főfutó: 4 lengőkar-lap, 8 merevítő |
+| – | Alumínium lemez | 4 mm, kb. 60 × 50 mm | 1 | főfutó: 2 láb |
+| – | Kerékbak | PA vagy PETG nyomtatva (STEP), vagy Al | 2 | a főkerék tengelye M3 menettel |
+| – | Csapszeg | M3 csavar 70–75 mm + távtartó cső 5/3,2 mm | 4 | lengőkar és merevítő felső csuklója (az aknafalak között) |
+| – | Tolórúd | 1,5–2 mm acélhuzal vagy M2 menetes rúd villás véggel | 4 | 2 × 99 mm (alsó), 2 × 63 mm (felső) |
+| – | Rétegelt lemez | 3 mm | 1 | középső former, akna belső falai (2), első/hátsó falai (4) |
 | – | Főkerék | 62 mm (2,5"), kb. 22 mm széles, könnyű hab- vagy PU-kerék | 2 | db |
 | – | Orrkerék | 40 mm (kb. 1,5"), kb. 15 mm széles | 2 | ikerkerék |
 | – | Csavarok | M3 csavar + önzáró anya + alátét | 12 | csuklók és tengelyek |
 | – | Csapágy | 693-2RS, 3×8×4 mm, rozsdamentes | 4 | főkerekek (kerekenként 2) |
 | – | Csapágy | MR63-2RS 3×6×2,5 vagy 683-2RS 3×7×3, rozsdamentes | 4 | orrkerekek (kerekenként 2) |
 | – | Tengely | 3 mm rozsdamentes illesztett csavar vagy csap + távtartó hüvely | 4 | kerekenként 1 |
-| – | Gumiharang | kis, tolórúdhoz | 2 | a főfutó tolórúdjainak rése |
+| – | Gumiharang | kis, tolórúdhoz | 4 | a főfutó tolórúdjainak rése az akna belső falán |
 | – | Tömítő átvezetés | zsírozott sárgaréz cső + szilikon | 1 | orrfutó tolórúdja |
 | **Víztartály** | | | | méretek: [FUTOMU_ES_TARTALY.md](FUTOMU_ES_TARTALY.md) |
 | – | Szervó | MG90S | 2 | ürítőajtók (1), merítőlapok (1); a XIAO D5 és D9 lábán |

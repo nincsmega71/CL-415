@@ -1,6 +1,8 @@
 # CL-415 futómű és víztartály: geometria, SVG rajzok, DXF alkatrészek, paraméterlista
 import math, os, sys
 import ezdxf
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from futomu_kinematika import P as KP
 
 OUT = sys.argv[1]
 IMG = os.path.join(OUT, 'docs', 'img')
@@ -12,34 +14,17 @@ for d in (IMG, CAD, DXF):
 # ------------------------------------------------------------------ paraméterek (mm)
 P = dict(
     torzs_belso_szel=155.0, fal=5.0, chine_mag=34.0, oldal_mag=171.0,
-    talaj_y=-30.0,                       # gerinc a talaj felett 30 mm (a fő tengelynél)
+    talaj_y=round(KP['GROUND'], 1),       # a gerinc a talaj felett (főfutó v2, kiengedve)
     fo_kerek_d=62.0, fo_kerek_sz=22.0,
-    fo_csuklo_x=86.0, fo_felso_csuklo_y=90.0, fo_also_csuklo_y=66.0,
-    fo_kar_hossz=70.0, fo_szog_behuzva=85.0, fo_szog_kiengedve=-25.0,
-    fo_lab_felso_tav=60.0, fo_lab_also_tav=36.0, fo_lab_tengely_kiallas=16.0,
-    fo_lab_cso=8.0,
+    fo_tengely_kiengedve_y=round(KP['AXE'][1], 1),
     vizvonal_y=46.0,
-    sp_x=0.0, fo_tengely_x=45.0, lepcso_x=38.0, merito_x=50.0, tartaly_hossz=72.0,
-    orr_tengelytav=450.0, orr_kerek_d=40.0, orr_lab_hossz=59.0, orr_csuklo_keel_felett=20.0,
-    tartaly_kulso_szel=130.0, tartaly_fal=2.0, tartaly_teteje_y=88.0, v_szog=24.0,
-    ajto_hossz=50.0, ajto_szel=34.0, merito_nyilas_sz=15.0, merito_nyilas_h=10.0,
+    sp_x=0.0, fo_tengely_x=62.0, lepcso_x=38.0, merito_x=50.0, tartaly_hossz=72.0,
+    orr_tengelytav=450.0, orr_kerek_d=40.0, orr_lab_hossz=69.0, orr_csuklo_keel_felett=20.0,
+    tartaly_kulso_szel=81.0, tartaly_fal=2.0, tartaly_teteje_y=124.0, v_szog=24.0,
+    ajto_hossz=50.0, ajto_szel=32.0, merito_nyilas_sz=15.0, merito_nyilas_h=10.0,
 )
 xs = P['torzs_belso_szel'] / 2 + P['fal']          # külső oldalfal x = 82.5
 
-
-def fo_allapot(a_deg):
-    a = math.radians(a_deg)
-    R = P['fo_kar_hossz']
-    Bu = (P['fo_csuklo_x'] + R * math.cos(a), P['fo_felso_csuklo_y'] + R * math.sin(a))
-    Bl = (P['fo_csuklo_x'] + R * math.cos(a), P['fo_also_csuklo_y'] + R * math.sin(a))
-    ax = (Bu[0] + P['fo_lab_tengely_kiallas'], Bu[1] - P['fo_lab_felso_tav'])
-    return Bu, Bl, ax
-
-
-ret = fo_allapot(P['fo_szog_behuzva'])
-ext = fo_allapot(P['fo_szog_kiengedve'])
-print('behúzva: tengely', [round(v, 1) for v in ret[2]], ' kiengedve: tengely', [round(v, 1) for v in ext[2]])
-print('nyomtáv', round(2 * ext[2][0]), 'mm; forgás', P['fo_szog_behuzva'] - P['fo_szog_kiengedve'], '°')
 
 # ------------------------------------------------------------------ SVG segédek
 COL = dict(ink='#1d2830', mut='#5b6a72', hull='#888780', arm='#24485e', wheel='#2c2c2a',
@@ -65,94 +50,6 @@ def dim_v(x, y1, y2, label, T, side=1):
     a, b = T(0, y1)[1], T(0, y2)[1]
     return (f'<line x1="{x}" y1="{a}" x2="{x}" y2="{b}" stroke="{COL["dim"]}" stroke-width="0.8" marker-start="url(#a)" marker-end="url(#a)"/>'
             f'<text class="d" x="{x+6*side}" y="{(a+b)/2+4}" text-anchor="{"start" if side>0 else "end"}">{label}</text>')
-
-# ------------------------------------------------------------------ 1. főfutó elölnézet
-S = 2.0; CX = 520; CY = 470
-
-
-def T(x, y):
-    return (round(CX + x * S, 1), round(CY - y * S, 1))
-
-
-def pl(pts, **kw):
-    s = ' '.join(f'{T(*p)[0]},{T(*p)[1]}' for p in pts)
-    st = ' '.join(f'{k.replace("_","-")}="{v}"' for k, v in kw.items())
-    return f'<polyline points="{s}" fill="none" {st}/>'
-
-
-def circ(c, r, **kw):
-    st = ' '.join(f'{k.replace("_","-")}="{v}"' for k, v in kw.items())
-    x, y = T(*c)
-    return f'<circle cx="{x}" cy="{y}" r="{r*S}" {st}/>'
-
-
-b = ''
-# talaj, vízvonal
-b += pl([(-210, P['talaj_y']), (210, P['talaj_y'])], stroke=COL['mut'], stroke_width=1)
-b += f'<text class="ts" x="{T(-205,0)[0]}" y="{T(0,P["talaj_y"])[1]+14}">talaj (kiengedett futóval)</text>'
-b += pl([(-180, P['vizvonal_y']), (178, P['vizvonal_y'])], stroke=COL['water'], stroke_width=1, stroke_dasharray='6 4')
-b += f'<text class="ts" x="{T(-175,0)[0]}" y="{T(0,P["vizvonal_y"])[1]-5}" style="fill:{COL["water"]}">vízvonal 500 ml-rel (kb. 46 mm)</text>'
-# hajótest keresztmetszet (külső)
-hull = [(0, 0), (xs, P['chine_mag']), (xs, P['oldal_mag']), (-xs, P['oldal_mag']), (-xs, P['chine_mag']), (0, 0)]
-b += pl(hull, stroke=COL['hull'], stroke_width=2)
-b += pl([(-xs + 5, P['chine_mag'] + 2), (-xs + 5, P['oldal_mag'] - 5), (xs - 5, P['oldal_mag'] - 5), (xs - 5, P['chine_mag'] + 2)], stroke=COL['hull'], stroke_width=0.8, stroke_dasharray='3 3')
-b += f'<text class="ts" x="{T(0,150)[0]}" y="{T(0,150)[1]}" text-anchor="middle">futómű-former (belül)</text>'
-# szervó középen + tolórudak
-sv = (0, 95)
-b += f'<rect x="{T(-11,101)[0]}" y="{T(-11,101)[1]}" width="{22*S}" height="{12*S}" fill="#F1EFE8" stroke="#5F5E5A"/>'
-b += f'<text class="ts" x="{T(0,108)[0]}" y="{T(0,108)[1]}" text-anchor="middle">szervó</text>'
-
-
-def gear(side, a_deg, colr, label):
-    Bu, Bl, ax = fo_allapot(a_deg)
-    m = lambda p: (side * p[0], p[1])
-    Au = m((P['fo_csuklo_x'], P['fo_felso_csuklo_y'])); Al = m((P['fo_csuklo_x'], P['fo_also_csuklo_y']))
-    s = ''
-    # konzol a falon
-    s += f'<rect x="{min(T(*m((xs,62)))[0],T(*m((xs+8.5,94)))[0])}" y="{T(0,94)[1]}" width="{8.5*S}" height="{38*S}" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>'
-    s += pl([Au, m(Bu)], stroke=COL['arm'], stroke_width=4)
-    s += pl([Al, m(Bl)], stroke=COL['arm'], stroke_width=4)
-    top = m(Bu); top = (top[0], top[1] + 6)
-    leg_bot = m((ax[0] - P['fo_lab_tengely_kiallas'], ax[1] - 3))
-    s += pl([top, leg_bot], stroke=COL['wheel'], stroke_width=P['fo_lab_cso'] * S * 0.9)
-    s += pl([m((ax[0] - P['fo_lab_tengely_kiallas'], ax[1])), m(ax)], stroke=COL['wheel'], stroke_width=2)
-    cx, cy = T(*m(ax)); hw = P['fo_kerek_sz'] / 2 * S; hr = P['fo_kerek_d'] / 2 * S
-    s += f'<rect x="{cx-hw}" y="{cy-hr}" width="{2*hw}" height="{2*hr}" rx="{hw*0.7}" fill="{COL["wheel"]}"/>'
-    for p in (Au, Al, m(Bu), m(Bl)):
-        s += circ(p, 1.6, fill=colr)
-    lx = T(*m((150, 0)))[0]
-    s += f'<text class="th" x="{lx}" y="{T(0,190)[1]}" text-anchor="middle" style="fill:{colr}">{label}</text>'
-    return s
-
-
-b += gear(-1, P['fo_szog_behuzva'], COL['ret'], 'BEHÚZVA')
-b += gear(1, P['fo_szog_kiengedve'], COL['arm'], 'KIENGEDVE')
-# a lábtető pályája (ív) a jobb oldalon
-arc = []
-for k in range(0, 41):
-    a = P['fo_szog_behuzva'] - (P['fo_szog_behuzva'] - P['fo_szog_kiengedve']) * k / 40
-    arc.append(fo_allapot(a)[2])
-b += pl(arc, stroke=COL['ret'], stroke_width=1, stroke_dasharray='4 3')
-b += f'<text class="ts" x="{T(150,70)[0]}" y="{T(150,70)[1]}">a tengely útja</text>'
-# méretek
-b += dim_h(0, ext[2][0], T(0, P['talaj_y'])[1] + 34, f'félnyomtáv {ext[2][0]:.0f} (nyomtáv {2*ext[2][0]:.0f})', T)
-b += dim_h(0, xs, T(0, 0)[1] + 22, f'{xs:.1f}', T)
-b += dim_v(T(205, 0)[0], 0, P['fo_felso_csuklo_y'], f'felső csukló {P["fo_felso_csuklo_y"]:.0f}', T)
-b += dim_v(T(186, 0)[0], 0, P['fo_also_csuklo_y'], f'alsó csukló {P["fo_also_csuklo_y"]:.0f}', T)
-b += dim_v(T(-196, 0)[0], 0, ret[2][1], f'{ret[2][1]:.0f}', T, side=-1)
-b += f'<text class="ts" x="{T(-196,0)[0]-6}" y="{T(0,ret[2][1])[1]+18}" text-anchor="end">tengely behúzva</text>'
-b += f'<text class="t" x="{T(0,0)[0]}" y="{T(0,0)[1]+14}" text-anchor="middle">gerinc (y = 0)</text>'
-# jelmagyarázat
-ly = 640
-leg = [(COL['arm'], 'kar: 70 mm csuklótávolság, 2 mm alumínium (oldalanként 2 db)'),
-       (COL['wheel'], 'láb: 8×8 mm alumínium zártszelvény, 3 mm-es tengelycsavar'),
-       ('#5F5E5A', 'konzol: 2 fül oldalanként, a former két lapjára ragasztva, 8,5 mm-re kiáll a falból'),
-       (COL['ret'], 'csuklók: M3 csavar + önzáró anya; forgás 110°')]
-for k, (c, t) in enumerate(leg):
-    b += f'<rect x="40" y="{ly+k*20-10}" width="16" height="10" fill="{c}"/><text class="t" x="64" y="{ly+k*20}">{t}</text>'
-b += f'<text class="th" x="40" y="30">Főfutó elölnézetben (a futómű-former síkjában), 1 mm = {S} képpont</text>'
-b += f'<text class="ts" x="40" y="48">Bal fél: behúzva, a kerék a hajótest oldalán, a vízvonal felett. Jobb fél: kiengedve. A két oldalt egy közös szervó mozgatja.</text>'
-open(os.path.join(IMG, 'futomu_elol.svg'), 'w').write(svg(1080, 730, 'Főfutó elölnézet', b))
 
 # ------------------------------------------------------------------ 2. oldalnézet: állomások
 S2 = 0.95; X0 = 560; Y0 = 300
@@ -188,7 +85,7 @@ b += pl2(top, stroke=COL['hull'], stroke_width=2)
 b += pl2([(-60, 171), (-60, 200), (160, 200), (160, 171)], stroke=COL['hull'], stroke_width=1.2)
 b += f'<text class="ts" x="{T2(50,190)[0]}" y="{T2(50,190)[1]}" text-anchor="middle">szárny (220 mm húr)</text>'
 # SP
-cx, cy = T2(0, 128)
+cx, cy = T2(0, 152)
 b += f'<circle cx="{cx}" cy="{cy}" r="8" fill="#fff" stroke="{COL["ink"]}" stroke-width="1.5"/><path d="M{cx} {cy-8} A8 8 0 0 1 {cx+8} {cy} L{cx} {cy}Z" fill="{COL["ink"]}"/><path d="M{cx} {cy+8} A8 8 0 0 1 {cx-8} {cy} L{cx} {cy}Z" fill="{COL["ink"]}"/>'
 b += f'<text class="t" x="{cx}" y="{cy-14}" text-anchor="middle">SP</text>'
 # tartály
@@ -205,8 +102,9 @@ b += pl2([(mx - 8, keel_y(mx) + 0), (mx + 6, keel_y(mx) - 9)], stroke=COL['ret']
 b += pl2([(mx + 4, keel_y(mx) + 2), (mx - 4, 40), (-30, 40), (-30, 30)], stroke=COL['tank'], stroke_width=1.5)
 # főfutó (kiengedve) a SP mögött
 fx = P['fo_tengely_x']
-b += pl2([(fx, 90), (fx, 1)], stroke=COL['wheel'], stroke_width=4)
-cx, cy = T2(fx, 1)
+fy = P['fo_tengely_kiengedve_y']
+b += pl2([(fx, 90), (fx, fy)], stroke=COL['wheel'], stroke_width=4)
+cx, cy = T2(fx, fy)
 b += f'<circle cx="{cx}" cy="{cy}" r="{31*S2}" fill="none" stroke="{COL["wheel"]}" stroke-width="5"/>'
 # orrfutó
 ky = keel_y(nose_x); piv = (nose_x, ky + P['orr_csuklo_keel_felett'])
@@ -221,8 +119,8 @@ b += f'<text class="ts" x="{T2(nose_x,0)[0]}" y="{T2(0,piv[1]+32)[1]}" text-anch
 # méretek
 yb = T2(0, P['talaj_y'])[1] + 28
 b += dim_h(nose_x, fx, yb, f'tengelytáv {P["orr_tengelytav"]:.0f}', T2)
-b += dim_h(0, fx, yb + 30, f'SP → főtengely {fx:.0f} (kb. 24°)', T2)
-b += dim_h(-L / 2, L / 2, T2(0, 104)[1], f'tartály {L:.0f}', T2)
+b += dim_h(0, fx, yb + 30, f'SP → főtengely {fx:.0f}', T2)
+b += dim_h(-L / 2, L / 2, T2(0, 134)[1], f'tartály {L:.0f}', T2)
 b += f'<text class="th" x="30" y="28">Oldalnézet: a futóművek és a tartály helye (a körvonal vázlatos)</text>'
 b += f'<text class="ts" x="30" y="46">Minden hossz a súlyponttól (SP) mérve, hátra pozitív. A szaggatott narancs vonalak a behúzott/nyitott állapotot mutatják.</text>'
 open(os.path.join(IMG, 'futomu_tartaly_oldal.svg'), 'w').write(svg(1240, 420, 'Futóművek és tartály oldalnézetben', b))
@@ -247,11 +145,11 @@ for zs in (-1, 1):
     b += f'<rect x="{T3(-P["ajto_hossz"]/2,0)[0]}" y="{T3(0,min(zz))[1]}" width="{P["ajto_hossz"]*S3}" height="{P["ajto_szel"]*S3}" fill="#FAECE7" stroke="{COL["ret"]}" stroke-width="1.5"/>'
     mz = 12 * zs
     b += f'<rect x="{T3(mx-5,0)[0]}" y="{T3(0,mz-7.5)[1]}" width="{10*S3}" height="{15*S3}" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.5"/>'
-    b += f'<rect x="{T3(fx-6,0)[0]}" y="{T3(0,zs*xs-(8 if zs>0 else 0))[1]}" width="{12*S3}" height="{8*S3}" fill="#F1EFE8" stroke="#5F5E5A"/>'
-b += f'<text class="t" x="{T3(0,0)[0]}" y="{T3(0,xs)[1]+22}" text-anchor="middle">2 ürítőajtó (bal és jobb rekesz), 50 × 34 mm</text>'
+    b += f'<rect x="{T3(fx-33,0)[0]}" y="{T3(0,zs*xs-(8 if zs>0 else 0))[1]}" width="{66*S3}" height="{8*S3}" fill="#F1EFE8" stroke="#5F5E5A"/>'
+b += f'<text class="t" x="{T3(0,0)[0]}" y="{T3(0,xs)[1]+22}" text-anchor="middle">2 ürítőajtó (bal és jobb rekesz), 50 × 32 mm</text>'
 b += f'<text class="t" x="{T3(mx,0)[0]+30}" y="{T3(0,-xs)[1]-24}">2 merítőlap 10 × 15 mm-es ráccsal</text>'
 b += f'<line x1="{T3(mx,0)[0]+28}" y1="{T3(0,-xs)[1]-28}" x2="{T3(mx,0)[0]}" y2="{T3(0,-20)[1]}" stroke="{COL["mut"]}" stroke-dasharray="3 3"/>'
-b += f'<text class="t" x="{T3(fx,0)[0]+70}" y="{T3(0,xs)[1]+48}">főfutó-konzolok az oldalfalon</text>'
+b += f'<text class="t" x="{T3(fx,0)[0]+70}" y="{T3(0,xs)[1]+48}">főfutó-aknák (oldalt nyitottak)</text>'
 b += f'<line x1="{T3(fx,0)[0]+68}" y1="{T3(0,xs)[1]+44}" x2="{T3(fx,0)[0]}" y2="{T3(0,xs)[1]+4}" stroke="{COL["mut"]}" stroke-dasharray="3 3"/>'
 b += dim_h(-P['ajto_hossz'] / 2, P['ajto_hossz'] / 2, T3(0, -42)[1] - 8, '50', T3)
 b += f'<text class="th" x="30" y="28">Alulnézet a súlypont környékén</text>'
@@ -259,7 +157,7 @@ b += f'<text class="ts" x="30" y="46">Elöl balra. Az ajtók a V-fenék két old
 open(os.path.join(IMG, 'futomu_tartaly_alul.svg'), 'w').write(svg(940, 460, 'Alulnézet: ajtók és merítőlapok', b))
 
 # ------------------------------------------------------------------ 4. tartály keresztmetszet
-S4 = 2.4; X4 = 330; Y4 = 385
+S4 = 2.0; X4 = 330; Y4 = 410
 
 
 def T4(x, y):
@@ -274,15 +172,15 @@ def pl4(pts, **kw):
 
 hw = P['tartaly_kulso_szel'] / 2; vd = hw * math.tan(math.radians(P['v_szog']))
 b = ''
-b += pl4([(0, 0), (xs, P['chine_mag']), (xs, 130)], stroke=COL['hull'], stroke_width=1.5)
-b += pl4([(0, 0), (-xs, P['chine_mag']), (-xs, 130)], stroke=COL['hull'], stroke_width=1.5)
+b += pl4([(0, 0), (xs, P['chine_mag']), (xs, 150)], stroke=COL['hull'], stroke_width=1.5)
+b += pl4([(0, 0), (-xs, P['chine_mag']), (-xs, 150)], stroke=COL['hull'], stroke_width=1.5)
 tank = [(0, 5), (hw, 5 + vd), (hw, P['tartaly_teteje_y']), (-hw, P['tartaly_teteje_y']), (-hw, 5 + vd), (0, 5)]
 pts = ' '.join(f'{T4(*p)[0]},{T4(*p)[1]}' for p in tank)
 b += f'<polygon points="{pts}" fill="{COL["tankf"]}" stroke="{COL["tank"]}" stroke-width="2"/>'
 b += pl4([(0, 5), (0, P['tartaly_teteje_y'])], stroke=COL['tank'], stroke_width=2)
-wl = 81
+wl = 111
 b += pl4([(-hw + 2, wl), (hw - 2, wl)], stroke=COL['water'], stroke_width=1, stroke_dasharray='4 3')
-b += f'<text class="ts" x="{T4(hw,wl)[0]+8}" y="{T4(0,wl)[1]+4}">500 ml-es szint (kb. 81 mm)</text>'
+b += f'<text class="ts" x="{T4(hw,wl)[0]+8}" y="{T4(0,wl)[1]+4}">500 ml-es szint (kb. 111 mm)</text>'
 for sgn in (-1, 1):
     p1 = (sgn * 8, 5 + 8 * math.tan(math.radians(P['v_szog'])))
     p2 = (sgn * (8 + P['ajto_szel'] * math.cos(math.radians(P['v_szog']))), p1[1] + P['ajto_szel'] * math.sin(math.radians(P['v_szog'])))
@@ -300,7 +198,7 @@ b += f'<text class="t" x="{T4(hw/2,40)[0]}" y="{T4(0,40)[1]}" text-anchor="middl
 b += f'<text class="ts" x="{T4(0,-14)[0]}" y="{T4(0,-14)[1]}" text-anchor="middle">V-fenék 24°-os hajlással, a hajótesttel együtt; az ajtók a chine felőli élükön csuklósak</text>'
 b += f'<text class="th" x="30" y="28">Tartály keresztmetszet (elölről), belső térfogat kb. 557 ml</text>'
 b += f'<text class="ts" x="30" y="46">Két rekesz, 2 mm-es PETG falakkal; mindkét rekesz alján egy-egy ürítőajtó (narancs, szaggatva: nyitva).</text>'
-open(os.path.join(IMG, 'tartaly_metszet.svg'), 'w').write(svg(720, 450, 'Tartály keresztmetszet', b))
+open(os.path.join(IMG, 'tartaly_metszet.svg'), 'w').write(svg(720, 470, 'Tartály keresztmetszet', b))
 
 # ------------------------------------------------------------------ DXF alkatrészek
 def new_doc():
@@ -325,40 +223,13 @@ def save(doc, msp, name, note):
     doc.saveas(os.path.join(DXF, name))
 
 
-# kar (alsó): 70 mm csuklótáv, 10 mm széles, 2 mm Al
-d, m = new_doc(); slot_part(m, 70, 10, [(0, 0, 3.2), (70, 0, 3.2)])
-save(d, m, 'fofuto_kar_also.dxf', 'Fofuto also kar - 2 mm aluminium - 2 db')
-# felső kar fül a szervó tolórúdnak: 10 mm-re a csuklótól, 90°-ban
-d, m = new_doc(); slot_part(m, 70, 10, [(0, 0, 3.2), (70, 0, 3.2)])
-m.add_lwpolyline([(-5, 0), (-5, -14), (5, -14), (5, 0)], dxfattribs={'layer': 'KONTUR'})
-m.add_circle((0, -10), 1.0, dxfattribs={'layer': 'FURAT'})
-save(d, m, 'fofuto_kar_felso.dxf', 'Fofuto felso kar fullel (tolorud 2 mm-es Z-hajlitas, 10 mm) - 2 mm Al - 2 db')
-# konzol fül: 8,5 × 38, csuklók 24 mm-re egymástól, 3,5 mm-re a fal síkjától; 20 mm-es nyelv a former lapjára ragasztva
-d, m = new_doc()
-m.add_lwpolyline([(-20, -8), (0, -8), (0, -10), (8.5, -10), (8.5, 28), (0, 28), (0, 24), (-20, 24), (-20, -8)], close=True, dxfattribs={'layer': 'KONTUR'})
-m.add_circle((3.5, 0), 1.6, dxfattribs={'layer': 'FURAT'}); m.add_circle((3.5, 24), 1.6, dxfattribs={'layer': 'FURAT'})
-save(d, m, 'fofuto_konzol_ful.dxf', 'Konzol ful - 3 mm retegelt lemez - oldalankent 2 db, a former elso es hatso lapjara ragasztva, kozottuk a karok - x=0 a kulso falsik')
-# láb fúrási sablon (8×8 Al cső)
-d, m = new_doc()
-m.add_lwpolyline([(0, -4), (8, -4), (8, 64), (0, 64)], close=True, dxfattribs={'layer': 'KONTUR'})
-for y, dd in ((0, 3.2), (36, 3.2), (60, 3.2)):
-    m.add_circle((4, y), dd / 2, dxfattribs={'layer': 'FURAT'})
-save(d, m, 'fofuto_lab_furatok.dxf', 'Lab: 8x8 Al zartszelveny 68 mm. y=0 tengely (oldalirany), y=36 es y=60 csuklo (elore-hatra)')
-# futómű-former (a Paper-Replika F8-hoz illesztve): gerinc y=0, chine 34, oldal 171
-d, m = new_doc()
-hwf = P['torzs_belso_szel'] / 2
-m.add_lwpolyline([(0, 0), (hwf, 33.3), (hwf, 171), (-hwf, 171), (-hwf, 33.3)], close=True, dxfattribs={'layer': 'KONTUR'})
-m.add_lwpolyline([(-11.4, 89), (11.4, 89), (11.4, 101.2), (-11.4, 101.2)], close=True, dxfattribs={'layer': 'KONTUR'})
-for sx in (-1, 1):
-    m.add_lwpolyline([(sx * 30, 70), (sx * 58, 70), (sx * 58, 150), (sx * 30, 150)], close=True, dxfattribs={'layer': 'KONTUR'})
-save(d, m, 'fofuto_former.dxf', 'Fofuto-former 3 mm retegelt lemez. Kozepen 9 g-os szervo kivagas (22,8x12,2). Oldalt ablak a tolorudnak; a konzolfulek nyelve a szelen mindket lapra ragad.')
 # orrfutó láb (oldalnézeti lemez)
 d, m = new_doc()
 L0 = P['orr_lab_hossz']
 m.add_lwpolyline([(-6, 6), (6, 6), (6, -L0 - 6), (-6, -L0 - 6)], close=True, dxfattribs={'layer': 'KONTUR'})
 m.add_lwpolyline([(-6, 6), (-16, 6), (-16, -4), (-6, -4)], dxfattribs={'layer': 'KONTUR'})
 m.add_circle((0, 0), 1.6, dxfattribs={'layer': 'FURAT'}); m.add_circle((0, -L0), 1.6, dxfattribs={'layer': 'FURAT'}); m.add_circle((-12, 1), 1.0, dxfattribs={'layer': 'FURAT'})
-save(d, m, 'orrfuto_lab.dxf', 'Orrfuto lab: 3 mm Al vagy szenszalas lemez. Csuklo felul, tengely 59 mm-rel lejjebb, 2x40 mm kerek; ful a tolorudnak.')
+save(d, m, 'orrfuto_lab.dxf', 'Orrfuto lab: 3 mm Al vagy szenszalas lemez. Csuklo felul, tengely 69 mm-rel lejjebb, 2x40 mm kerek; ful a tolorudnak.')
 d, m = new_doc()
 m.add_lwpolyline([(0, 0), (85, 0), (85, 52), (0, 52)], close=True, dxfattribs={'layer': 'KONTUR'})
 save(d, m, 'orrfuto_aknaajto.dxf', 'Orrfuto aknaajto 85x52 - 1 mm PET vagy 0,8 mm retegelt lemez - a labra ragasztva, behuzva lezarja az aknat')
@@ -386,7 +257,7 @@ save(d, m, 'tartaly_fenek.dxf', 'Tartaly fenek (V-fel) ajtonyilassal - 2 db (tuk
 d, m = new_doc()
 m.add_lwpolyline([(0, 0), (P['ajto_hossz'] + 2, 0), (P['ajto_hossz'] + 2, P['ajto_szel'] + 2), (0, P['ajto_szel'] + 2)], close=True, dxfattribs={'layer': 'KONTUR'})
 m.add_circle(((P['ajto_hossz'] + 2) / 2, 6), 1.0, dxfattribs={'layer': 'FURAT'})
-save(d, m, 'urito_ajto.dxf', 'Uritoajto 52x36 - 1 mm PET + szilikon tomites - 2 db; csuklo a chine feloli hosszu elen')
+save(d, m, 'urito_ajto.dxf', 'Uritoajto 52x34 - 1 mm PET + szilikon tomites - 2 db; csuklo a chine feloli hosszu elen')
 d, m = new_doc()
 m.add_lwpolyline([(0, 0), (20, 0), (20, 17), (0, 17)], close=True, dxfattribs={'layer': 'KONTUR'})
 for k in range(3):
@@ -397,8 +268,11 @@ save(d, m, 'merito_lap.dxf', 'Meritolap racsos nyilassal 20x17 - 2 db; elso elen
 lines = ["' SolidWorks globalis valtozok (Eszkozok > Egyenletek > Importalas). Minden ertek mm vagy fok."]
 for k, v in P.items():
     lines.append(f'"{k}" = {v}')
-lines += ["' Szamitott ertekek", f'"fo_tengely_behuzva_x" = {ret[2][0]:.1f}', f'"fo_tengely_behuzva_y" = {ret[2][1]:.1f}',
-          f'"fo_tengely_kiengedve_x" = {ext[2][0]:.1f}', f'"fo_tengely_kiengedve_y" = {ext[2][1]:.1f}',
-          f'"nyomtav" = {2*ext[2][0]:.1f}', f'"kulso_oldalfal_x" = {xs}']
+lines += ["' Fofuto v2 (a Dumas-fele CL-215 futomu 0,81-szeresen)"]
+for k in ('LT', 'LP', 'L4', 'L3', 'AX_U', 'AX_N', 'R_CRANK', 'ALPHA', 'TOP_RI', 'TOP_RO', 'TOP_C', 'TOP_SPAN', 'TH_RET', 'TH_EXT', 'PH_RET', 'PH_EXT'):
+    lines.append(f'"fo2_{k}" = {round(float(KP[k]), 2)}')
+for k in ('OT', 'OB', 'SERVO_B', 'SERVO_T', 'AXE', 'AXR'):
+    lines.append(f'"fo2_{k}_x" = {round(float(KP[k][0]), 2)}'); lines.append(f'"fo2_{k}_y" = {round(float(KP[k][1]), 2)}')
+lines.append(f'"kulso_oldalfal_x" = {xs}')
 open(os.path.join(CAD, 'cl415_parameterek.txt'), 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
 print('kész', sorted(os.listdir(DXF)))

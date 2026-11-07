@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461350.829201389
+2461352.6742708334
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461350.829201389
+2461352.6742708334
   9
 $TDUUPDATE
  40
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{7BC566E0-FF80-4BFE-8BB0-9830CC0C75C9}
+{B20BB8BB-EFDC-4DE9-8A5D-120292943EF5}
   9
 $VERSIONGUID
   2
-{757E2838-0D3A-4DBC-8B78-7561D0835093}
+{BBC053A4-947B-447A-9D5E-B47551E7DDF4}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -5307,11 +5307,11 @@ AcDbPolyline
  10
 52.0
  20
-36.0
+34.0
  10
 0.0
  20
-36.0
+34.0
   0
 CIRCLE
   5
@@ -5353,7 +5353,7 @@ AcDbText
  40
 3.0
   1
-Uritoajto 52x36 - 1 mm PET + szilikon tomites - 2 db; csuklo a chine feloli hosszu elen
+Uritoajto 52x34 - 1 mm PET + szilikon tomites - 2 db; csuklo a chine feloli hosszu elen
  11
 0.0
  21
@@ -6465,7 +6465,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:54:03.599187+00:00
+1.4.5 @ 2026-11-07T15:10:57.158167+00:00
   0
 VISUALSTYLE
   5
@@ -7177,7 +7177,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:54:03.604653+00:00
+1.4.5 @ 2026-11-07T15:10:57.160361+00:00
   0
 ENDSEC
   0

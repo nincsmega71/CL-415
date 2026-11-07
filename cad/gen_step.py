@@ -10,14 +10,11 @@ os.makedirs(PD, exist_ok=True)
 
 # ---------------------------------------------------------------- paraméterek (egyezzenek a gen_futomu_tartaly.py-val)
 XS = 82.5                       # külső oldalfal
-PX, PUY, PLY = 86.0, 90.0, 66.0 # csuklók
 R = 70.0
-A_RET, A_EXT = 85.0, -25.0
-LEG_UP, LEG_LO, AX_OFF = 60.0, 36.0, 16.0
 FO_D, FO_W = 62.0, 22.0
-ORR_D, ORR_W, ORR_L = 40.0, 15.0, 59.0
-T_W, T_L, T_TOP, V = 130.0, 72.0, 88.0, 24.0
-AJ_L, AJ_W = 50.0, 34.0
+ORR_D, ORR_W, ORR_L = 40.0, 15.0, 69.0
+T_W, T_L, T_TOP, V = 81.0, 72.0, 124.0, 24.0
+AJ_L, AJ_W = 50.0, 32.0
 
 C = {
     'al': cq.Color(0.75, 0.77, 0.80), 'fa': cq.Color(0.80, 0.65, 0.42), 'gumi': cq.Color(0.15, 0.15, 0.15),
@@ -46,32 +43,6 @@ def slot_plate(L, W, t, holes):
     for (x, y, d) in holes:
         w = w.cut(cq.Workplane('XY').center(x, y).circle(d / 2).extrude(t))
     return w
-
-
-# ---------------------------------------------------------------- főfutó alkatrészek
-kar_also = save_part(slot_plate(R, 10, 2, [(0, 0, 3.2), (R, 0, 3.2)]), 'fofuto_kar_also')
-kar_felso = slot_plate(R, 10, 2, [(0, 0, 3.2), (R, 0, 3.2)])
-kar_felso = kar_felso.union(plate([(-5, 0), (-5, -14), (5, -14), (5, 0)], 2, holes=[(0, -10, 2.0)]))
-kar_felso = kar_felso.cut(cq.Workplane('XY').circle(1.6).extrude(2))
-save_part(kar_felso, 'fofuto_kar_felso')
-
-konzol = plate([(-20, -8), (0, -8), (0, -10), (8.5, -10), (8.5, 28), (0, 28), (0, 24), (-20, 24)], 3,
-               holes=[(3.5, 0, 3.2), (3.5, 24, 3.2)])
-save_part(konzol, 'fofuto_konzol_ful')
-
-hw = 155 / 2
-former = plate([(0, 0), (hw, 33.3), (hw, 171), (-hw, 171), (-hw, 33.3)], 3,
-               cuts=[[(-11.4, 89), (11.4, 89), (11.4, 101.2), (-11.4, 101.2)],
-                     [(30, 70), (58, 70), (58, 150), (30, 150)], [(-30, 70), (-58, 70), (-58, 150), (-30, 150)]])
-save_part(former, 'fofuto_former')
-
-# láb: 8×8×1 zártszelvény, Y irányban, y = -4..64; csuklófuratok Z irányban, tengelyfurat X irányban
-lab = cq.Workplane('XZ').rect(8, 8).extrude(-68).translate((0, -4, 0))
-lab = lab.cut(cq.Workplane('XZ').rect(6, 6).extrude(-68).translate((0, -4, 0)))
-for y in (LEG_LO, LEG_UP):
-    lab = lab.cut(cq.Workplane('XY').center(0, y).circle(1.6).extrude(10, both=True))
-lab = lab.cut(cq.Workplane('YZ').circle(1.6).extrude(10, both=True))
-save_part(lab, 'fofuto_lab')
 
 
 def wheel(D, W, bore_seat, seat_depth, center_bore, fillet):
@@ -108,39 +79,6 @@ def to_x(shape):
     """Z tengelyű forgástestet X tengelyűvé fordít."""
     return shape.rotate((0, 0, 0), (0, 1, 0), 90)
 
-
-def fo_state(a_deg):
-    a = math.radians(a_deg)
-    Bu = (PX + R * math.cos(a), PUY + R * math.sin(a))
-    Bl = (PX + R * math.cos(a), PLY + R * math.sin(a))
-    return Bu, Bl, (Bu[0] + AX_OFF, Bu[1] - LEG_UP)
-
-
-def fofuto_assy(a_deg, name):
-    asm = cq.Assembly(name=name)
-    asm.add(former.translate((0, 0, -1.5)), name='former', color=C['fa'])
-    Bu, Bl, ax = fo_state(a_deg)
-    for side, sn in ((1, 'J'), (-1, 'B')):
-        def place(shape, x, y, z, rot=0):
-            s = shape.rotate((0, 0, 0), (0, 0, 1), rot).translate((x, y, z))
-            return s.mirror('YZ') if side < 0 else s
-        asm.add(place(konzol, XS, PLY, 1.5), name=f'konzol_{sn}1', color=C['fa'])
-        asm.add(place(konzol, XS, PLY, -4.5), name=f'konzol_{sn}2', color=C['fa'])
-        asm.add(place(kar_felso, PX, PUY, -1, a_deg), name=f'kar_felso_{sn}', color=C['al'])
-        asm.add(place(kar_also, PX, PLY, -1, a_deg), name=f'kar_also_{sn}', color=C['al'])
-        asm.add(place(lab, Bu[0], ax[1], 5), name=f'lab_{sn}', color=C['al'])
-        wx, wy, wz = ax[0], ax[1], 5
-        asm.add(place(to_x(fokerek), wx, wy, wz), name=f'fokerek_{sn}', color=C['gumi'])
-        for k, dx in enumerate((-FO_W / 2 + 2, FO_W / 2 - 2)):
-            asm.add(place(to_x(cs693), wx + dx, wy, wz), name=f'csapagy_{sn}{k+1}', color=C['acel'])
-        asm.add(place(to_x(tav_fo), wx, wy, wz), name=f'tavtarto_{sn}', color=C['agy'])
-        asm.add(place(to_x(tengely_fo), wx - 5, wy, wz), name=f'tengely_{sn}', color=C['acel'])
-    asm.save(os.path.join(AD, name + '.step'))
-    return asm
-
-
-fofuto_assy(A_EXT, 'fofuto_kiengedve')
-fofuto_assy(A_RET, 'fofuto_behuzva')
 
 # ---------------------------------------------------------------- orrfutó (kiengedve, a csukló az origóban)
 orr_lab = plate([(-6, 6), (6, 6), (6, -ORR_L - 6), (-6, -ORR_L - 6)], 3,

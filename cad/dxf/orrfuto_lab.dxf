@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461350.829201389
+2461352.6742708334
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461350.829201389
+2461352.6742708334
   9
 $TDUUPDATE
  40
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{6ED64BE7-6C67-419E-84F2-7FA7589F5255}
+{202FB1F0-A4A4-4EC6-A60A-51F5E414256A}
   9
 $VERSIONGUID
   2
-{2F7D007E-3E81-4105-9D0F-6343E05DC37F}
+{938A3DBF-2E06-4346-9D7A-252A769D64B5}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -5307,11 +5307,11 @@ AcDbPolyline
  10
 6.0
  20
--65.0
+-75.0
  10
 -6.0
  20
--65.0
+-75.0
   0
 LWPOLYLINE
   5
@@ -5379,7 +5379,7 @@ AcDbCircle
  10
 0.0
  20
--59.0
+-69.0
  30
 0.0
  40
@@ -5425,7 +5425,7 @@ AcDbText
  40
 3.0
   1
-Orrfuto lab: 3 mm Al vagy szenszalas lemez. Csuklo felul, tengely 59 mm-rel lejjebb, 2x40 mm kerek; ful a tolorudnak.
+Orrfuto lab: 3 mm Al vagy szenszalas lemez. Csuklo felul, tengely 69 mm-rel lejjebb, 2x40 mm kerek; ful a tolorudnak.
  11
 0.0
  21
@@ -6537,7 +6537,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:54:03.527440+00:00
+1.4.5 @ 2026-11-07T15:10:57.106736+00:00
   0
 VISUALSTYLE
   5
@@ -7249,7 +7249,7 @@ DictionaryVariables
 280
 0
   1
-1.4.5 @ 2026-11-05T18:54:03.530514+00:00
+1.4.5 @ 2026-11-07T15:10:57.109522+00:00
   0
 ENDSEC
   0
